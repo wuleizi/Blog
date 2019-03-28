@@ -1,1 +1,1 @@
-#Blog
+# wuzequn.com
