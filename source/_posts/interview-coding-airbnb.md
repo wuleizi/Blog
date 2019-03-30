@@ -3203,43 +3203,51 @@ int main() {
 ## 最大的矩形
 二维数组中只有0和1，寻找数组中最大的1矩形
 ``` cpp
+// stack
 #include <vector>
 #include <iostream>
 #include <math.h>
 #include <climits>
+#include <stack>
 using namespace std;
 
-int helper(vector<vector<int>>& nums) {
-    int ret = 0;
-    if (nums.empty() || nums[0].empty()) return ret;
-    
+int helper(vector<vector<char>>& nums) {
+    if (nums.empty() || nums[0].empty()) return 0;
     int m = nums.size(), n = nums[0].size();
+    
     vector<vector<int>> dp(m, vector<int>(n, 0));
     for (int i = 0; i < m; i++) {
         int ans = 0;
         for (int j = 0; j < n; j++) {
-            if (!nums[i][j]) {
-                ans = 0;
-            }
-            else {
+            if (nums[i][j] == '1') {
                 ans ++;
                 dp[i][j] = ans;
             }
+            else {
+                ans = 0;
+            }
         }
     }
-    cout << endl;
-    for (int j = 0; j < n; j++) {
-        int ans = INT_MAX, cnt = 0;
-        for (int i = 0; i < m; i++) {
-            if (!dp[i][j]) {
-                ans = INT_MAX;
-                cnt = 0;
-            }
-            else {
+    int ret = 0;
+    for (int i = 0; i < n; i++) {
+        stack<int> s;
+        for (int j = 0; j < m; j++) {
+            int cnt = 0;
+            while (!s.empty() && s.top() > dp[j][i]) {
                 cnt ++;
-                ans = min(ans, dp[i][j]);
+                ret = max(ret, cnt * s.top());
+                s.pop();
             }
-            ret = max(ret, cnt * ans);
+            while (cnt >= 0) {
+                cnt --;
+                s.push(dp[j][i]);
+            }
+        }
+        int cnt = 0;
+        while (!s.empty()) {
+            cnt ++;
+            ret = max(ret, cnt * s.top());
+            s.pop();
         }
     }
     return ret;
@@ -3249,7 +3257,7 @@ int main() {
     int m, n;
     cin >> m >> n;
     
-    vector<vector<int>> nums(m, vector<int>(n, 0));
+    vector<vector<char>> nums(m, vector<char>(n, 0));
     for (int i = 0; i < m; i++) {
         for (int j = 0; j < n; j++) {
             cin >> nums[i][j];
@@ -3261,11 +3269,78 @@ int main() {
     return 0;
 }
 /*
-4 4
-0 1 1 1
-1 1 1 0
-0 1 1 1
-0 0 0 0
+6 6
+101101
+111111
+011011
+111010
+011111
+110111
+
+*/
+
+
+// dp
+#include <vector>
+#include <iostream>
+#include <math.h>
+#include <climits>
+#include <stack>
+using namespace std;
+
+int helper(vector<vector<char>>& nums) {
+    if (nums.empty() || nums[0].empty()) return 0;
+        
+    int m = nums.size(), n = nums[0].size();
+    int ret = 0;
+    vector<int> height(n, 0), left(n, 0), right(n, n);
+    for (int i = 0; i < m; i++) {
+        int index_l = 0, index_r = n - 1;
+        
+        for (int j = 0; j < n; j++) {
+            if (nums[i][j] == '1') height[j]++;
+            else height[j] = 0;
+        }
+        
+        for (int j = 0; j < n; j++) {
+            if (nums[i][j] == '1') left[j] = max(left[j], index_l);
+            else left[j] = 0, index_l = j + 1;
+        }
+        for (int j = n - 1; j >= 0; j--) {
+            if (nums[i][j] == '1') right[j] = min(right[j], index_r);
+            else right[j] = n, index_r = j - 1;
+        }
+        for (int j = 0; j < n; j++) {
+            ret = max(ret, (right[j] - left[j] + 1) * height[j]);
+        }
+    }
+    return ret;
+}
+
+int main() {
+    int m, n;
+    cin >> m >> n;
+    
+    vector<vector<char>> nums(m, vector<char>(n, 0));
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            cin >> nums[i][j];
+        }
+    }
+
+    cout << helper(nums) << endl;
+
+    return 0;
+}
+/*
+6 6
+101101
+111111
+011011
+111010
+011111
+110111
+
 */
 ```
 
