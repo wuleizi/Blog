@@ -1027,3 +1027,83 @@ int main() {
 */
 ```
 
+## 无向图的最小环
+```
+输入：
+n个点，t条边
+输出：
+最短环的路径
+```
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <utility>
+#include <unordered_set>
+#include <algorithm>
+using namespace std;
+
+
+vector<int> helper(vector<pair<int, int>>& nums, int n) {
+    vector<unordered_set<int>> adj(n);
+    for (auto i : nums) {
+        if (i.first == i.second) continue;
+        adj[i.first].insert(i.second);
+        adj[i.second].insert(i.first);
+    }
+
+    vector<vector<int>> cur;
+    cur.push_back({0});
+
+    while (true) {
+        vector<vector<int>> next;
+        for (auto i : cur) {
+            for (auto j : adj[i.back()]) {
+                if (i.size() > 2 && j == 0) {
+                    i.push_back(0);
+                    return i;
+                }
+                if (find(i.begin(), i.end(), j) == i.end()) {
+                    auto temp = i;
+                    temp.push_back(j);
+                    next.push_back(temp);
+                }
+                
+            }
+        }
+        if (next.empty()) break;
+        cur = next;
+    }
+    return vector<int>();
+}
+
+int main() {
+    int n;
+    cin >> n;
+    int t;
+    cin >> t;
+    vector<pair<int, int>> nums;
+    for (int i = 0; i < t; i++) {
+        int x, y;
+        cin >> x >> y;
+        nums.push_back({x, y});
+    }
+
+
+    for (auto i : helper(nums, n)) {
+        cout << i << " ";
+    }
+    cout << endl;
+    return 0;
+}
+/*
+6 7
+0 1
+1 2
+1 3
+2 3
+2 4
+4 5
+5 0
+*/
+```
