@@ -79,12 +79,12 @@ Output: One possible answer is [2, 3, 1, 3, 1, 2].
 class Solution {
 public:
     void wiggleSort(vector<int>& nums) {
-        vector<int> ans(nums);
-        sort(ans.begin(), ans.end());
+        // 之所以这样是防止中间的部分重叠例如[4, 5, 5, 6]
         int n = nums.size();
-        int left = 0, right = (n + 1) / 2, index = 0;
-        for (int i = n - 1; i >= 0; i--) {
-            nums[i] = ans[i & 1 ? right++ : left++];
+        int l = (n + 1) / 2 - 1, r = n - 1;
+        for (int i = 0; i < n; i++) {
+            if (i & 1) nums[i] = ans[r --];
+            else nums[i] = ans[l--];
         }
     }
 };
@@ -618,6 +618,7 @@ Explanation: Maximum amount of money the thief can rob = 4 + 5 = 9.
  */
 class Solution {
 public:
+// 不一定是隔一行，也可能是左右子树所在行不一样，但是max保证了一定是隔着的
     int helper(TreeNode* root, int& l, int& r) {
         if (!root) return 0;
         int ll = 0, lr = 0, rl = 0, rr = 0;
