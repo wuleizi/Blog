@@ -247,8 +247,256 @@ int main() {
 }
 ```
 
+<<<<<<< HEAD
 ## 剩余题目
 待续。。。
+=======
+### 区间和
+``` cpp
+// 2019-04-13
+#include <iostream>
+#include <vector>
+
+using namespace std;
+class segment_tree {
+private:
+    vector<int> sum;
+    vector<int> add;
+    void PushUp(int root) {
+        sum[root] = sum[root << 1] + sum[root << 1 | 1];
+    }
+
+    void build(vector<int>& nums, int l, int r, int root) {
+        if (l == r) {
+            sum[root] = nums[l - 1];
+            return; 
+        }
+
+        int m = l + (r - l) / 2;
+        build(nums, l, m, root << 1);
+        build(nums, m + 1, r, root << 1 |1);
+        PushUp(root);
+    }
+    void PushDown(int root, int cnt_l, int cnt_r) {
+        if (add[root]) {
+            sum[root << 1] += add[root] * cnt_l;
+            sum[root << 1 | 1] += add[root] * cnt_r;
+            add[root << 1] += add[root];
+            add[root << 1| 1] += add[root];
+            add[root] = 0;
+        }
+    }
+public:
+    segment_tree(vector<int>& nums) {
+        int n = nums.size();
+        sum = vector<int>(n << 2, 0);
+        add = vector<int>(n << 2, 0);
+        build(nums, 1, n, 1);
+    }
+    void Update(int L, int R, int c, int l, int r, int root) {
+        // 更新是加c到L..R
+        cout << l << " " << r << endl;
+        if (L <= l && r <= R) {
+            sum[root] += c * (r - l + 1);
+            add[root] += c;
+            return;
+        }
+
+        int m = l + (r - l) / 2;
+        PushDown(root, m - l + 1, r - m);
+        if (L <= m) Update(L, R, c, l, m, root << 1);
+        if (m < R) Update(L, R, c, m + 1, r, root << 1 | 1);
+        PushUp(root);
+    }
+    void Update(int index, int c, int l, int r, int root) {
+        if (l == r) {
+            sum[root] += c;
+            return;
+        }
+        int m = l + (r - l) / 2;
+        if (index <= m) Update(index, c, l, m, root << 1);
+        else Update(index, c, m + 1, r, root << 1 | 1);
+        PushUp(root);
+    }
+    int query(int L, int R, int l, int r, int root) {
+        if (L <= l && r <= R) {
+            return sum[root];
+        }
+
+        int ret = 0;
+        int m = l + (r - l) / 2;
+        PushDown(root, m - l + 1, r - m);
+        if (L <= m) ret += query(L, R, l, m, root << 1);
+        if (m < R) ret += query(L, R, m + 1, r, root << 1 | 1);
+        return ret;
+
+    }
+
+};
+
+
+int main() {
+    int n;
+    cin >> n;
+    vector<int> nums(n, 0);
+    for (int i = 0; i < n; i++) {
+        cin >> nums[i];
+    }
+    auto instance = new segment_tree(nums);
+    
+    int t;
+    cin >> t;
+    for (int i = 0; i < t; i++) {
+        for (int j = 1; j <= n; j++) {
+            cout << instance->query(j, j, 1, n, 1) << " ";
+        }
+        cout << endl;
+        int x, y, c;
+        cin >> x >> y >> c;
+        if (x == y) {
+            instance->Update(x, c, 1, n, 1);
+        }
+        else {
+            instance->Update(x, y, c, 1, n, 1);
+        }
+    }
+
+    return 0;
+}
+```
+
+### 最大公因数
+> 因为最大公因数对于加减没有惰性标记代表性，所以这里采用乘除作为update的参数
+
+> update(L,R, c, l, r, root)代表给L到R的所有数都乘以c
+
+``` cpp
+// 2019-04-13
+#include <iostream>
+#include <vector>
+#include <math.h>
+
+using namespace std;
+
+class segment_tree {
+private:
+    vector<int> ans;
+    vector<int> mul;
+    int GCD(int a, int b) {
+        if (!b) return a;
+        else return GCD(b, a % b);
+    }
+    void PushUp(int root) {
+        ans[root] = GCD(ans[root << 1], ans[root << 1 | 1]);
+    }
+    void PushDown(int root) {
+        if (mul[root] != 1) {
+            ans[root << 1] *= mul[root];
+            ans[root << 1 | 1] *= mul[root];
+            mul[root << 1] *= mul[root];
+            mul[root << 1 | 1] *= mul[root];
+            mul[root] = 1;
+        }
+    }
+    void build(vector<int>& nums, int l, int r, int root) {
+        if (l == r) {
+            ans[root] = nums[l - 1];
+            return;
+        }
+        int m = l + (r - l) / 2;
+        if (l <= m) build(nums, l, m, root << 1);
+        if (m < r) build(nums, m + 1, r, root << 1 | 1);
+        PushUp(root);
+    }
+
+public:
+    segment_tree(vector<int>& nums) {
+        int n = nums.size();
+        // 根据不同问题要注意区间值的初始化问题，因为防止没有叶子导致上推引入异常值
+        // 因为GCD算法会判断!b，所以将初始值初始化为0可以直接返回a,
+        // 这样上推可以直接调用GCD(ans[root << 1], ans[root << 1 | 1])
+        ans = vector<int>(n << 2, 0);
+        mul = vector<int>(n << 2, 1);
+        build(nums, 1, n, 1);
+    }
+    void Update(int L, int R, int c, int l, int r, int root) {
+        if (L <= l && r <= R) {
+            ans[root] *= c;
+            mul[root] *= c;
+            return;
+        }
+        PushDown(root);
+        int m = l + (r - l) / 2;
+        if (L <= m) Update(L, R, c, l, m, root << 1);
+        if (m < R) Update(L, R, c, m + 1, r, root << 1 | 1);
+        PushUp(root);
+    }
+    void Update(int index, int c, int l, int r, int root) {
+        if (l == r) {
+            ans[root] *= c;
+            return;
+        }
+        int m = l + (r - l) / 2;
+        if (index <= m) Update(index, c, l, m, root << 1);
+        else Update(index, c, m + 1, r, root << 1 | 1);
+        PushUp(root);
+    }
+    int Query(int L, int R, int l, int r, int root) {
+        if (L <= l && r <= R) {
+            return ans[root];
+        }
+        PushDown(root);
+        int ret = 0;
+        int m = l + (r - l) / 2;
+        if (L <= m) ret = GCD(ret, Query(L, R, l, m, root << 1));
+        if (m < R) ret = GCD(ret, Query(L, R, m + 1, r, root << 1 | 1));
+        return ret;
+    }
+};
+
+int main() {
+    int n;
+    cin >> n;
+    
+    vector<int> nums(n, 0);
+    for (int i = 0; i < n; i++) {
+        cin >> nums[i];
+    }
+    auto instance = new segment_tree(nums);
+    
+    int t;
+    cin >> t;
+    for (auto i = 0; i < t; i++) {
+        int x, y, c;
+        cin >> x >> y >> c;
+        if (x == y) {
+            instance->Update(x, c, 1, n, 1);
+        }
+        else {
+            instance->Update(x, y, c, 1, n, 1);
+        }
+        cin >> x >> y;
+        cout << instance->Query(x, y, 1, n, 1) << endl;
+    }
+
+    return 0;
+}
+```
+
+### 字符串哈希
+待补充。。。
+
+## 最长连续零
+待补充。。。
+
+## 计数排序
+待补充。。。
+
+## 扫描线
+待补充。。。
+
+
+>>>>>>> 7e952b6888ff68fe2e0d29acaa3d74c76779a6d2
 
 
 
