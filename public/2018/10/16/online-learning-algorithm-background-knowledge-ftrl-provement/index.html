@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="之前的项目中用到了FTRL，在最近的交流中经常被问及这方面的相关基础，发现之前对在线学习的基础知识掌握不全面，以及对OGD和SGD等效性没有理论依据，这里作为总结。   本文参考资料losteng的csdn和雷天琪的回答  在线学习算法相关背景在线学习算法强调的是训练的实时性，面向流式数据，每次训练不使用全量数据，而是以之前训练好的参数为基础，每次利用一个样本更新一次模型，是属于增量学习的一部分">
+<meta name="description" content="之前的项目中用到了FTRL，在最近的交流中经常被问及这方面的相关基础，发现之前对在线学习的基础知识掌握不全面，以及对OGD和SGD等效性没有理论依据，这里作为总结。 本文参考资料losteng的csdn和雷天琪的回答  在线学习算法相关背景在线学习算法强调的是训练的实时性，面向流式数据，每次训练不使用全量数据，而是以之前训练好的参数为基础，每次利用一个样本更新一次模型，是属于增量学习的一部分，从">
 <meta name="keywords" content="算法基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="由FTRL展开，在线梯度下降（OGD）理论基础以及与离线梯度下降算法等效性证明总结">
 <meta property="og:url" content="https://wuzequn.com/2018/10/16/online-learning-algorithm-background-knowledge-ftrl-provement/index.html">
 <meta property="og:site_name" content="磊子的博客">
-<meta property="og:description" content="之前的项目中用到了FTRL，在最近的交流中经常被问及这方面的相关基础，发现之前对在线学习的基础知识掌握不全面，以及对OGD和SGD等效性没有理论依据，这里作为总结。   本文参考资料losteng的csdn和雷天琪的回答  在线学习算法相关背景在线学习算法强调的是训练的实时性，面向流式数据，每次训练不使用全量数据，而是以之前训练好的参数为基础，每次利用一个样本更新一次模型，是属于增量学习的一部分">
+<meta property="og:description" content="之前的项目中用到了FTRL，在最近的交流中经常被问及这方面的相关基础，发现之前对在线学习的基础知识掌握不全面，以及对OGD和SGD等效性没有理论依据，这里作为总结。 本文参考资料losteng的csdn和雷天琪的回答  在线学习算法相关背景在线学习算法强调的是训练的实时性，面向流式数据，每次训练不使用全量数据，而是以之前训练好的参数为基础，每次利用一个样本更新一次模型，是属于增量学习的一部分，从">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://wuzequn.com/2018/10/16/online-learning-algorithm-background-knowledge-ftrl-provement/offline-online.png">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-49a27b17bfa0dd6a07028f46a5383b1f_hd.jpg">
@@ -103,7 +103,7 @@
 <meta property="og:updated_time" content="2018-10-16T14:49:50.327Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="由FTRL展开，在线梯度下降（OGD）理论基础以及与离线梯度下降算法等效性证明总结">
-<meta name="twitter:description" content="之前的项目中用到了FTRL，在最近的交流中经常被问及这方面的相关基础，发现之前对在线学习的基础知识掌握不全面，以及对OGD和SGD等效性没有理论依据，这里作为总结。   本文参考资料losteng的csdn和雷天琪的回答  在线学习算法相关背景在线学习算法强调的是训练的实时性，面向流式数据，每次训练不使用全量数据，而是以之前训练好的参数为基础，每次利用一个样本更新一次模型，是属于增量学习的一部分">
+<meta name="twitter:description" content="之前的项目中用到了FTRL，在最近的交流中经常被问及这方面的相关基础，发现之前对在线学习的基础知识掌握不全面，以及对OGD和SGD等效性没有理论依据，这里作为总结。 本文参考资料losteng的csdn和雷天琪的回答  在线学习算法相关背景在线学习算法强调的是训练的实时性，面向流式数据，每次训练不使用全量数据，而是以之前训练好的参数为基础，每次利用一个样本更新一次模型，是属于增量学习的一部分，从">
 <meta name="twitter:image" content="https://wuzequn.com/2018/10/16/online-learning-algorithm-background-knowledge-ftrl-provement/offline-online.png">
 
 
@@ -362,8 +362,6 @@
       
         <blockquote>
 <p>之前的项目中用到了FTRL，在最近的交流中经常被问及这方面的相关基础，发现之前对在线学习的基础知识掌握不全面，以及对OGD和SGD等效性没有理论依据，这里作为总结。</p>
-</blockquote>
-<blockquote>
 <p>本文参考资料<a href="https://blog.csdn.net/Losteng/article/details/51119764" target="_blank" rel="noopener">losteng的csdn</a>和<a href="https://www.zhihu.com/question/266462198/answer/309780073" target="_blank" rel="noopener">雷天琪的回答</a></p>
 </blockquote>
 <h1 id="在线学习算法相关背景"><a href="#在线学习算法相关背景" class="headerlink" title="在线学习算法相关背景"></a>在线学习算法相关背景</h1><p>在线学习算法强调的是训练的实时性，面向流式数据，每次训练不使用全量数据，而是以之前训练好的参数为基础，每次利用一个样本更新一次模型，是属于增量学习的一部分，从而快速更新模型，提高模型的时效性。</p>
@@ -377,22 +375,18 @@
 <h1 id="在线凸优化"><a href="#在线凸优化" class="headerlink" title="在线凸优化"></a>在线凸优化</h1><blockquote>
 <p>本章只是简单介绍，如果想要深入了解在线凸优化（OCO），强烈推荐阅读<a href="online-convext-optimization-book.pdf">Elad Hazand的著作</a>和<a href="OGD.pdf">Zinkevich的Paper</a></p>
 </blockquote>
-<p>聊到在线学习算法通常会说到专家系统，在$t$时刻专家$i$的损失是$\ell_t(e^i)$，于是这个时刻Weighted Majority（WM）损失的期望是$\sum_{i=1}^m w_t^i\ell_t(e^i)$，是关于这m个专家的损失的一个线性组合（因为权重$w_t^i$关于$i$的和为1，所以实际上是在一个simplex上）。将专家在$t$时刻的损失看成是这个时候进来的数据点，于是我们便在这里使用了一个线性的损失函数。</p>
+<p>聊到在线学习算法通常会说到专家系统，在$t$时刻专家$i$的损失是$\ell<em>t(e^i)$，于是这个时刻Weighted Majority（WM）损失的期望是$\sum</em>{i=1}^m w_t^i\ell_t(e^i)$，是关于这m个专家的损失的一个线性组合（因为权重$w_t^i$关于$i$的和为1，所以实际上是在一个simplex上）。将专家在$t$时刻的损失看成是这个时候进来的数据点，于是我们便在这里使用了一个线性的损失函数。</p>
 <p>WM的理论证明可以参考<a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.118.2277&amp;rep=rep1&amp;type=pdf" target="_blank" rel="noopener">Littlestone 94</a>,<a href="https://link.springer.com/content/pdf/10.1023%2FA%3A1007662407062.pdf" target="_blank" rel="noopener">Freund 99</a>，虽然在上个世纪已经完成，但是将其理论拓展到一般的凸的函数还是在03年由Zinkevich完成的。</p>
-<h1 id="在线梯度下降（OGD）"><a href="#在线梯度下降（OGD）" class="headerlink" title="在线梯度下降（OGD）"></a>在线梯度下降（OGD）</h1><p>Zinkevich提出的算法很简单，在时刻t做两步操作，首先利用当前得到数据对$h_t$进行一次梯度下降得到$h_{t+1}$，如果新的$h_{t+1}$不在$\mathcal{H}$中，那么将其投影进来：</p>
-<p>$$\displaystyle h_{t+1}=\Pi_{\mathcal{H}}(h_t-\eta_t\nabla\ell_t(h_t))$$</p>
-<p>这里$\nabla\ell_t(h_t)$是$\ell_t(h_t)$关于$h_t$的导数（如果导数不唯一，就用<a href="http://en.wikipedia.org/wiki/Subderivative" target="_blank" rel="noopener">次导数</a>），$\eta_t$是学习率，$\Pi_{\mathcal{H}}(\cdot)$是投影子，其将不在$\mathcal{H}$中的向量$x$投影成一个与$x$最近的但在$\mathcal{H}$中的向量（如果$x$已经在$\mathcal{H}$中了，那就不做任何事），用公式表达就是$\Pi_{\mathcal{H}}(x)=\arg\min_{y\in\mathcal{H}}|x-y|$。此算法通常被称之为 Online Gradient Descent。</p>
+<h1 id="在线梯度下降（OGD）"><a href="#在线梯度下降（OGD）" class="headerlink" title="在线梯度下降（OGD）"></a>在线梯度下降（OGD）</h1><p>Zinkevich提出的算法很简单，在时刻t做两步操作，首先利用当前得到数据对$h<em>t$进行一次梯度下降得到$h</em>{t+1}$，如果新的$h_{t+1}$不在$\mathcal{H}$中，那么将其投影进来：</p>
+<script type="math/tex; mode=display">\displaystyle h_{t+1}=\Pi_{\mathcal{H}}(h_t-\eta_t\nabla\ell_t(h_t))</script><p>这里$\nabla\ell<em>t(h_t)$是$\ell_t(h_t)$关于$h_t$的导数（如果导数不唯一，就用<a href="http://en.wikipedia.org/wiki/Subderivative" target="_blank" rel="noopener">次导数</a>），$\eta_t$是学习率，$\Pi</em>{\mathcal{H}}(\cdot)$是投影子，其将不在$\mathcal{H}$中的向量$x$投影成一个与$x$最近的但在$\mathcal{H}$中的向量（如果$x$已经在$\mathcal{H}$中了，那就不做任何事），用公式表达就是$\Pi<em>{\mathcal{H}}(x)=\arg\min</em>{y\in\mathcal{H}}|x-y|$。此算法通常被称之为 Online Gradient Descent。</p>
 <p>先来啰嗦几句其与离线梯度下降的区别。在离线的情况下，我们知道所有数据，所以能计算得到整个目标函数的梯度，从而朝最优解 迈出坚实的一步。而在online设定下，我们只根据当前的数据来计算一个梯度，其很可能与真实目标函数的梯度有一定的偏差。我们能保证的只是会减小的值，而对别的项的减少程度是未知的。当然，我们还是一直在朝目标前进，只是可能要走点弯路。</p>
 <p><img src="/2018/10/16/online-learning-algorithm-background-knowledge-ftrl-provement/offline-online.png" alt=""></p>
 <p>那online的优势在哪里呢？其关键是每走一步只需要看一下当前的一个数据，所以代价很小。而offline的算法每走一个要看下所有数据来算一 个真实梯度，所以代价很大。假定有100个数据，offline走10步就到最优，而online要100步才能到。但这样offline需要看1000 个数据，而online只要看100个数据，所以还是online代价小。</p>
 <p>在这里，$\mathcal{H}$的作用是什么呢？记得在ML中的目标函数通常是损失+罚$\ell(h)+\lambda f(h)$的形式。例如ridge regression就是平方误差+$\ell_2$罚，lasso是平方误差+$\ell_1$罚，SVM是hinge loss+$\ell_2$罚。最小化这个目标函数可以等价于在$f(h)\le\delta$的限制下最小化$\ell(h)$。$\lambda$和$\delta$是一一对应的关系。实际上$f(h)\le\delta$就是定义了一个凸子空间，例如使用$\ell_2$罚时就是一个半径为$\delta$的球。所以，Online Gradient Descent可以online的解这一类目标函数，只是对于不同的罚选择不同的投影子。</p>
-<p>下面是理论分析。记投影前的 $\tilde h_{t+1} = h_t-\eta_t\nabla\ell_t(h_t)$，以及offline最优解$h^<em>=\arg\min_{h\in\mathcal{H}}\sum_{t=1}^T\ell_t(h)$ 。因为$ \mathcal{H} $是凸的且 $ h^</em> $ 在其中，所以对 $ \tilde h_{t+1} $ 投影只会减少其与 $ h^<em> $ 的距离，既 $ |h_{t+1}-h^</em>|\le|\tilde h_{t+1}-h^*| $ 。记 $ \nabla_t=\nabla \ell_t(h_t) $ ，注意到</p>
-<p>$$\displaystyle |\tilde h_{t+1}-h^<em>|^2=|h_t-h^</em>|^2+\eta_t^2|\nabla_t|^2-2\eta_t\langle\nabla_t,h_t-h^*\rangle.$$</p>
-<p>由于$\ell_t$是凸的，所以有</p>
-<p>$$\displaystyle \ell_t(h_t)-\ell_t(h^<em>)\le \langle\nabla_t,h_t-h^</em>\rangle \le \frac{1}{2\eta_t}\big(|h_t-h^<em>|^2 - |h_{t+1}-h^</em>|^2\big) + \frac{\eta_t}{2}|\nabla_t|^2.$$</p>
-<p>取固定的$\eta_t=\eta$，对$t$进行累加就有$R(T)\le \frac{1}{2\eta}|w_1-w^*|^2+\frac{\eta}{2}\sum_{t=1}^T|\nabla_t|^2$。记$\mathcal{H}$的直径为$D$，且对所有$t$有$|\nabla_t|\le L$成立（既Lipschitz常数为$L$），再取$\eta=\frac{D}{L\sqrt{T}}$，那么</p>
-<p>$$\displaystyle R(T)\le LD\sqrt{T}.$$</p>
-<p>这个bound可以通过设置变动的学习率$\eta_t$加强。</p>
+<p>下面是理论分析。记投影前的 $\tilde h<em>{t+1} = h_t-\eta_t\nabla\ell_t(h_t)$，以及offline最优解$h^*=\arg\min</em>{h\in\mathcal{H}}\sum<em>{t=1}^T\ell_t(h)$ 。因为$ \mathcal{H} $是凸的且 $ h^* $ 在其中，所以对 $ \tilde h</em>{t+1} $ 投影只会减少其与 $ h^<em> $ 的距离，既 $ |h_{t+1}-h^</em>|\le|\tilde h_{t+1}-h^*| $ 。记 $ \nabla_t=\nabla \ell_t(h_t) $ ，注意到</p>
+<script type="math/tex; mode=display">\displaystyle \|\tilde h_{t+1}-h^*\|^2=\|h_t-h^*\|^2+\eta_t^2\|\nabla_t\|^2-2\eta_t\langle\nabla_t,h_t-h^*\rangle.</script><p>由于$\ell_t$是凸的，所以有</p>
+<script type="math/tex; mode=display">\displaystyle \ell_t(h_t)-\ell_t(h^*)\le \langle\nabla_t,h_t-h^*\rangle \le \frac{1}{2\eta_t}\big(\|h_t-h^*\|^2 - \|h_{t+1}-h^*\|^2\big) + \frac{\eta_t}{2}\|\nabla_t\|^2.</script><p>取固定的$\eta<em>t=\eta$，对$t$进行累加就有$R(T)\le \frac{1}{2\eta}|w_1-w^*|^2+\frac{\eta}{2}\sum</em>{t=1}^T|\nabla_t|^2$。记$\mathcal{H}$的直径为$D$，且对所有$t$有$|\nabla_t|\le L$成立（既Lipschitz常数为$L$），再取$\eta=\frac{D}{L\sqrt{T}}$，那么</p>
+<script type="math/tex; mode=display">\displaystyle R(T)\le LD\sqrt{T}.</script><p>这个bound可以通过设置变动的学习率$\eta_t$加强。</p>
 <h1 id="FTRL更新公式和SGD更新公式的等效性"><a href="#FTRL更新公式和SGD更新公式的等效性" class="headerlink" title="FTRL更新公式和SGD更新公式的等效性"></a>FTRL更新公式和SGD更新公式的等效性</h1><p>SGD算法的迭代计算公式如下：</p>
 <p><img src="https://pic4.zhimg.com/80/v2-49a27b17bfa0dd6a07028f46a5383b1f_hd.jpg" alt=""></p>
 <p>其中 t 为迭代轮数，w是模型参数，g是loss function关于w的梯度，而η是学习率。</p>
@@ -584,7 +578,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
