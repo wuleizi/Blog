@@ -914,13 +914,16 @@ public:
         return helper(s, m, hash);
     }
 };
+
 ```
 
 
 ## 判断单链表是否有环，将环的入口返回
 > 验证地址[牛客网](https://www.nowcoder.com/practice/f836b2c43afc4b35ad6adc41ec941dba?tpId=13&tqId=11178&tPage=1&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
 
+
 ``` cpp
+
 class Solution {
 public:
     ListNode* EntryNodeOfLoop(ListNode* head) {
@@ -944,8 +947,8 @@ public:
 };
 ``` 
 
-
 ## 复杂链表复制
+
 > 验证地址[牛客网](https://www.nowcoder.com/practice/f836b2c43afc4b35ad6adc41ec941dba?tpId=13&tqId=11178&tPage=1&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
 
 ``` cpp
@@ -1011,9 +1014,10 @@ int helper(vector<int>& nums) {
 当选择第m+1的时候
 (1)第m+1个数字被选取的概率是m/(m+1)
 (2)前m个数字被选择的情况是最后一个没被选择或该数字没有被替换，则概率为m/(m+1) * (m-1)/m + (1 – m/(m+1)) * 1 = m/(m+1)
-```
+
 
 前n个满足条件，数学归纳法，当选择第n+1个数的时候，当然该数被选取的概率为m/(1+n)，之前被选择的数，首先他在之前被选择的概率为m/n，他能被保留的情况为后一个没被选择或被选择了但是自己没有被替换，所以概率为[m/(N+1) * (m-1)/m + (1-m/(N+1))]* m/N = m/(N+1)
+```
 
 代码：
 ``` cpp
