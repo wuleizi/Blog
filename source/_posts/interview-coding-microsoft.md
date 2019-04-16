@@ -1,19 +1,16 @@
 ---
 title: 【面经】微软部分编程算法题
-date: 2019-04-13 12:34:04
+date: 2019-04-13 17:04:18
 tags: [算法, 总结, 面经]
 ---
 
-
 > 本文收集2018-2019年实验室实习面试部分编程面经以供复习
-
-> 另外微软特别喜欢考剑指offer
-
 <!-- more -->
+> 另外微软特别喜欢考剑指offer
 
 ## 股票题目1-5
 ### Best Time to Buy and Sell Stock
-> 验证地址[Leetcode 121](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
+> 验证地址为[Leetcode 121](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
 
 ``` cpp
 class Solution {
@@ -50,7 +47,6 @@ public:
     }
 };
 ```
-
 ### Best Time to Buy and Sell Stock III
 > 验证地址[Leetcode 123](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/)
 
@@ -79,7 +75,6 @@ public:
         return ret;
     }
 };
-
 ```
 
 ``` cpp
@@ -102,8 +97,8 @@ public:
         return sell2;
     }
 };
-```
 
+```
 ### Best Time to Buy and Sell Stock IV
 > 验证地址[Leetcode 188](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/)
 
@@ -186,7 +181,6 @@ public:
 
 ## Open the Lock
 > 验证地址[Leetcode 752](https://leetcode.com/problems/open-the-lock/)
-
 ``` cpp
 // 加速方法是从两端出发，可以将速度加快一倍，也会使一端无法继续循环提前完成
 class Solution {
@@ -219,6 +213,7 @@ public:
 
 ## Bomb Enemy
 > 验证地址[Leetocde 361](https://leetcode.com/problems/bomb-enemy)
+
 > 由于是收费的，所以看题可以在[题干](https://www.cnblogs.com/grandyang/p/5599289.html)
 
 ``` cpp
@@ -290,7 +285,6 @@ E00W0
 
 ## Fence Repair
 > 验证地址[POJ 3253](http://poj.org/problem?id=3253)
-
 ``` cpp
 /*
 这道题的答案可以分解为，每次切一次，被包含在其中的每一个片都要被加到结果中一次
@@ -343,9 +337,7 @@ int main() {
 
 ## 背包
 ### 01背包
-
 有N件物品和一个容量为V的背包。第i建物品的费用是c[i],价值是w[i]。求解将哪些物品装入背包可使价值总和最大(不过这里表示的是正好被填满V)
-
 ``` cpp
 #include <iostream>
 #include <vector>
@@ -474,9 +466,9 @@ int main() {
 参考[背包九讲](https://www.cnblogs.com/jbelial/articles/2116074.html)
 
 
+
 ## 迷宫穿梭
 左上到右下，0为空，1为墙，找出任意一条路径
-
 ``` cpp
 // 找出一条路径用dfs，比较好写
 // 找出最短距离用bfs，如果存在一般用时间比较少
@@ -531,7 +523,7 @@ int main() {
     }
     return 0;
 }
-``` 
+```
 
 ## Excel Sheet Column Number
 > 验证地址[Leetcode 171](https://leetcode.com/problems/excel-sheet-column-number/)
@@ -550,11 +542,10 @@ public:
 };
 ```
 
+
 ## Reverse Linked List II
 > 验证地址[Leetcode 92](https://leetcode.com/problems/reverse-linked-list-ii/)
-
 ``` cpp
-
 class Solution {
 public:
     ListNode* reverseBetween(ListNode* head, int m, int n) {
@@ -581,6 +572,7 @@ public:
     }
 };
 ```
+
 
 ## 去除重复元素
 一个数组，比如[1,2,1,1,2,3,4],剔除重复的，然后还有个要求就是交换的操作要是原址的，就是比如前面的传入数组也要返回这个数组，[1,2,3,4,x,x,x,x]后面是什么不重要，前面一定要是和去重前一致。
@@ -621,7 +613,6 @@ int main() {
 
 ## 平方和
 a^2+b^2=c，abc为正整数，给一个c问是否存在值ab使等式成立，O(c)解法
-
 ``` cpp
 // dp思路
 #include <iostream>
@@ -654,10 +645,8 @@ int main() {
 }
 ```
 
-
 ## Search in Rotated Sorted Array
 > 验证地址[Leetcode 33](https://leetcode.com/problems/search-in-rotated-sorted-array/)
-
 
 ``` cpp
 class Solution {
@@ -684,10 +673,12 @@ public:
 };
 ```
 
+
 ## Binary Tree Right Side View
 > 验证地址[Leetcode 199](https://leetcode.com/problems/binary-tree-right-side-view/)
 
 ``` cpp
+
 class Solution {
 public:
     vector<int> rightSideView(TreeNode* root) {
@@ -742,7 +733,6 @@ int main() {
 
 ## 24点
 四个数，输出加减乘除括号组合起来等于24的所有表达式
-
 ``` cpp
 #include <iostream>
 #include <vector>
@@ -825,11 +815,10 @@ public:
         return ret;
     }
 };
-``` 
+```
 
 ## Gas Station
 > 验证地址[Leetcode 134](https://leetcode.com/problems/gas-station/)
-
 
 ``` cpp
 class Solution {
@@ -851,9 +840,7 @@ public:
 ```
 
 ## 最长递增子序列 O(nlogn)版本(*)
-> [参考资料](https://www.cnblogs.com/frankchenfu/p/7107019.html)
-
-
+> 参考[资料](https://www.cnblogs.com/frankchenfu/p/7107019.html)
 ``` cpp
 #include<cstdio>
 #include<algorithm>
@@ -914,14 +901,10 @@ public:
         return helper(s, m, hash);
     }
 };
-
 ```
 
-
 ## 判断单链表是否有环，将环的入口返回
-> 验证地址[牛客网](https://www.nowcoder.com/practice/f836b2c43afc4b35ad6adc41ec941dba?tpId=13&tqId=11178&tPage=1&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
-
-
+> 验证地址[牛客网](https://www.nowcoder.com/practice/253d2c59ec3e4bc68da16833f79a38e4?tpId=13&tqId=11208&tPage=1&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
 ``` cpp
 class Solution {
 public:
@@ -944,13 +927,13 @@ public:
         return NULL;
     }
 };
-``` 
+```
 
 ## 复杂链表复制
-
 > 验证地址[牛客网](https://www.nowcoder.com/practice/f836b2c43afc4b35ad6adc41ec941dba?tpId=13&tqId=11178&tPage=1&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
 
 ``` cpp
+
 class Solution {
 public:
     RandomListNode* Clone(RandomListNode* head) {
@@ -983,11 +966,9 @@ public:
 };
 ```
 
-
 ## 概率类相关题目
 ### 水塘抽样
-
-思路：总是选择第一个，然后以1/2的概率选择第二个，然后以1/3选择第三个…所以第i个被选择的概率是```[1/i]*[i/(i+1)]…[n-1/(n)]=1/n```，所以是等概率的。
+思路：总是选择第一个，然后以1/2的概率选择第二个，然后以1/3选择第三个...所以第i个被选择的概率是<code>[1/i]*[i/(i+1)]...[n-1/(n)]=1/n</code>，所以是等概率的。
 
 ``` cpp
 // rand():[0, 正无穷]
@@ -1000,20 +981,17 @@ int helper(vector<int>& nums) {
     }
     return ret;
 }
-
 ```
 
 ### 从n个数里面等概率选出m个
-
 原题目的场景大体是这样的：服务器每天会收到数以亿计的请求，但是目前服务器端不希望保存所有的请求，只想随机保存这些请求中的m个。试设计一种算法，能够使服务器实时保存m个请求，并使这些请求是从所有请求中的大致等概率被选中的结果。注意：不到一天的结束，是不能提前知道当天所有请求数n是多少的。
 
 思路：先选取前m个数字，那么当n<=m的时候，就是100%会被选中，当选择第n个数的时候，选取的标准是，以m/n的概率选择这个数，然后随机替换已经保存的m个数中的其中一个。以下是证明。
 
-```
+``` 
 当选择第m+1的时候
 (1)第m+1个数字被选取的概率是m/(m+1)
 (2)前m个数字被选择的情况是最后一个没被选择或该数字没有被替换，则概率为m/(m+1) * (m-1)/m + (1 – m/(m+1)) * 1 = m/(m+1)
-
 
 前n个满足条件，数学归纳法，当选择第n+1个数的时候，当然该数被选取的概率为m/(1+n)，之前被选择的数，首先他在之前被选择的概率为m/n，他能被保留的情况为后一个没被选择或被选择了但是自己没有被替换，所以概率为[m/(N+1) * (m-1)/m + (1-m/(N+1))]* m/N = m/(N+1)
 ```
@@ -1044,14 +1022,13 @@ vector<int> helper(vector<int>& nums, int m) {
 
 用50%拼p：p为20%，30%这种粒度，思路是构造0-9的随机数，50%产生0和1，那就产生4个数，共代表16个数，如果是10-15就舍去，重新生成，如果是小于p*10就生成0，否则生成1
 
-用p拼50%：这种比较好处理，因为p(1-p)和(1-p)p的概率相同，所以用01和10代表50%，其余舍去
+用p拼50%：这种比较好处理，因为p*(1-p)和(1-p)*p的概率相同，所以用01和10代表50%，其余舍去
 
 ### 其余概率题
 可以参考[资料1](https://blog.csdn.net/huazhongkejidaxuezpp/article/details/73662357)和[资料2](https://blog.csdn.net/kakulukia/article/details/49175811)
 
 
 ## 汉诺塔
-
 ``` cpp
 #include <iostream>
 #include <vector>
