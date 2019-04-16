@@ -923,7 +923,6 @@ public:
 
 
 ``` cpp
-
 class Solution {
 public:
     ListNode* EntryNodeOfLoop(ListNode* head) {
