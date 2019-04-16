@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Leetcode,周赛,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="磊子的博客" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="Weekly Contest 83 参赛地址  830. Positions of Large Groups [AC] Leetcode 830  In a string S of lowercase letters, these letters form consecutive groups of the same character. For example, a string like S">
+<meta name="keywords" content="Leetcode,周赛">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Leetcode 周赛模拟 【2】">
+<meta property="og:url" content="https://wuzequn.com/2018/10/25/Leetcode-virtual-contest-2/index.html">
+<meta property="og:site_name" content="磊子的博客">
+<meta property="og:description" content="Weekly Contest 83 参赛地址  830. Positions of Large Groups [AC] Leetcode 830  In a string S of lowercase letters, these letters form consecutive groups of the same character. For example, a string like S">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-25T13:13:53.113Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Leetcode 周赛模拟 【2】">
+<meta name="twitter:description" content="Weekly Contest 83 参赛地址  830. Positions of Large Groups [AC] Leetcode 830  In a string S of lowercase letters, these letters form consecutive groups of the same character. For example, a string like S">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wuzequn.com/2018/10/25/Leetcode-virtual-contest-2/">
+
+
+
+
+
+  <title>Leetcode 周赛模拟 【2】 | 磊子的博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c34bfc2e7d53d3a1ca114392659ca7e8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">磊子的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/About/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+</nav>
+
+
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wuzequn.com/2018/10/25/Leetcode-virtual-contest-2/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="磊子">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="磊子的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Leetcode 周赛模拟 【2】</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-25T22:07:19+08:00">
+                2018-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<h1 id="Weekly-Contest-83"><a href="#Weekly-Contest-83" class="headerlink" title="Weekly Contest 83"></a>Weekly Contest 83</h1><blockquote>
+<p><a href="https://leetcode.com/contest/weekly-contest-83/" target="_blank" rel="noopener">参赛地址</a></p>
+</blockquote>
+<h2 id="830-Positions-of-Large-Groups-AC"><a href="#830-Positions-of-Large-Groups-AC" class="headerlink" title="830. Positions of Large Groups [AC]"></a>830. Positions of Large Groups [AC]</h2><blockquote>
+<p><a href="https://leetcode.com/contest/weekly-contest-83/problems/positions-of-large-groups/" target="_blank" rel="noopener">Leetcode 830</a></p>
+</blockquote>
+<p>In a string S of lowercase letters, these letters form consecutive groups of the same character.</p>
+<p>For example, a string like S = “abbxxxxzyy” has the groups “a”, “bb”, “xxxx”, “z” and “yy”.</p>
+<p>Call a group large if it has 3 or more characters.  We would like the starting and ending positions of every large group.</p>
+<p>The final answer should be in lexicographic order.</p>
+<p>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;abbxxxxzzy&quot;</span><br><span class="line">Output: [[3,6]]</span><br><span class="line">Explanation: &quot;xxxx&quot; is the single large group with starting  3 and ending positions 6.</span><br></pre></td></tr></table></figure></p>
+<p>Example 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;abc&quot;</span><br><span class="line">Output: []</span><br><span class="line">Explanation: We have &quot;a&quot;,&quot;b&quot; and &quot;c&quot; but no large group.</span><br></pre></td></tr></table></figure></p>
+<p>Example 3:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;abcdddeeeeaabbbcd&quot;</span><br><span class="line">Output: [[3,5],[6,9],[12,14]]</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>Note:  1 &lt;= S.length &lt;= 1000</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; largeGroupPositions(<span class="built_in">string</span> S) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; ret;</span><br><span class="line">        <span class="keyword">int</span> n = S.size();</span><br><span class="line">        <span class="keyword">if</span> (!n) <span class="keyword">return</span> ret;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> cnt = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (i + cnt &lt; n &amp;&amp; S[i] == S[i + cnt]) cnt ++;</span><br><span class="line">            <span class="keyword">if</span> (cnt &lt;= <span class="number">2</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans(&#123;i, i + cnt - <span class="number">1</span>&#125;);</span><br><span class="line">            ret.push_back(ans);</span><br><span class="line">            i += cnt - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="831-Masking-Personal-Information-AC"><a href="#831-Masking-Personal-Information-AC" class="headerlink" title="831. Masking Personal Information [AC]"></a>831. Masking Personal Information [AC]</h2><blockquote>
+<p><a href="https://leetcode.com/contest/weekly-contest-83/problems/masking-personal-information/" target="_blank" rel="noopener">Leetcode 831</a></p>
+</blockquote>
+<p>We are given a personal information string S, which may represent either an email address or a phone number.</p>
+<p>We would like to mask this personal information according to the following rules:</p>
+<ol>
+<li>Email address:</li>
+</ol>
+<p>We define a name to be a string of length ≥ 2 consisting of only lowercase letters a-z or uppercase letters A-Z.</p>
+<p>An email address starts with a name, followed by the symbol ‘@’, followed by a name, followed by the dot ‘.’ and followed by a name. </p>
+<p>All email addresses are guaranteed to be valid and in the format of “<a href="mailto:name1@name2.name3" target="_blank" rel="noopener">name1@name2.name3</a>“.</p>
+<p>To mask an email, all names must be converted to lowercase and all letters between the first and last letter of the first name must be replaced by 5 asterisks ‘*’.</p>
+<ol start="2">
+<li>Phone number:</li>
+</ol>
+<p>A phone number is a string consisting of only the digits 0-9 or the characters from the set {‘+’, ‘-‘, ‘(‘, ‘)’, ‘ ‘}. You may assume a phone number contains 10 to 13 digits.</p>
+<p>The last 10 digits make up the local number, while the digits before those make up the country code. Note that the country code is optional. We want to expose only the last 4 digits and mask all other digits.</p>
+<p>The local number should be formatted and masked as “<strong><em>-</em></strong>-1111”, where 1 represents the exposed digits.</p>
+<p>To mask a phone number with country code like “+111 111 111 1111”, we write it in the form “+<strong><em>-</em></strong>-<strong>*-1111”.  The ‘+’ sign and the first ‘-‘ sign before the local number should only exist if there is a country code.  For example, a 12 digit phone number mask should start with “+</strong>-“.</p>
+<p>Note that extraneous characters like “(“, “)”, “ “, as well as extra dashes or plus signs not part of the above formatting scheme should be removed.</p>
+<p>Return the correct “mask” of the information provided.</p>
+<p>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;LeetCode@LeetCode.com&quot;</span><br><span class="line">Output: &quot;l*****e@leetcode.com&quot;</span><br><span class="line">Explanation: All names are converted to lowercase, and the letters between the</span><br><span class="line">             first and last letter of the first name is replaced by 5 asterisks.</span><br><span class="line">             Therefore, &quot;leetcode&quot; -&gt; &quot;l*****e&quot;.</span><br></pre></td></tr></table></figure></p>
+<p>Example 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;AB@qq.com&quot;</span><br><span class="line">Output: &quot;a*****b@qq.com&quot;</span><br><span class="line">Explanation: There must be 5 asterisks between the first and last letter </span><br><span class="line">             of the first name &quot;ab&quot;. Therefore, &quot;ab&quot; -&gt; &quot;a*****b&quot;.</span><br></pre></td></tr></table></figure></p>
+<p>Example 3:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;1(234)567-890&quot;</span><br><span class="line">Output: &quot;***-***-7890&quot;</span><br><span class="line">Explanation: 10 digits in the phone number, which means all digits make up the local number.</span><br></pre></td></tr></table></figure></p>
+<p>Example 4:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;86-(10)12345678&quot;</span><br><span class="line">Output: &quot;+**-***-***-5678&quot;</span><br><span class="line">Explanation: 12 digits, 2 digits for country code and 10 digits for local number.</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">helper</span><span class="params">(<span class="built_in">string</span> s, <span class="keyword">int</span>&amp; cnt)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">bool</span> ret = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i : s) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i == <span class="string">'@'</span>) ret = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">if</span> (i &gt;= <span class="string">'0'</span> &amp;&amp; i &lt;= <span class="string">'9'</span>) cnt ++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">maskPII</span><span class="params">(<span class="built_in">string</span> S)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (!helper(S, cnt)) &#123;</span><br><span class="line">            <span class="built_in">string</span> ret;</span><br><span class="line">            <span class="built_in">string</span> ans;</span><br><span class="line">            <span class="keyword">int</span> index = S.size() - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> c = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> (c &lt; <span class="number">4</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (S[index] &lt;= <span class="string">'9'</span> &amp;&amp; S[index] &gt;= <span class="string">'0'</span>) &#123;</span><br><span class="line">                    ans = S[index] + ans;</span><br><span class="line">                    c ++;</span><br><span class="line">                &#125;</span><br><span class="line">                index --;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (cnt &gt; <span class="number">10</span>) &#123;</span><br><span class="line">                ret = <span class="string">"+"</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; cnt - <span class="number">10</span>; i++) ret += <span class="string">"*"</span>;</span><br><span class="line">                ret += <span class="string">"-***-***-"</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> ret = <span class="string">"***-***-"</span>;</span><br><span class="line">            ret += ans;</span><br><span class="line">            <span class="keyword">return</span> ret;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;i : S) &#123;</span><br><span class="line">                <span class="keyword">if</span> (i &gt;= <span class="string">'A'</span> &amp;&amp; i &lt;= <span class="string">'Z'</span>) i = <span class="string">'a'</span> + (i - <span class="string">'A'</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">string</span> ret;</span><br><span class="line">            ret.push_back(S[<span class="number">0</span>]);</span><br><span class="line">            ret += <span class="string">"*****"</span>;</span><br><span class="line">            <span class="keyword">int</span> index = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (S[index + <span class="number">1</span>] != <span class="string">'@'</span>) index ++;</span><br><span class="line">            <span class="keyword">while</span> (index &lt; S.size()) ret += S[index ++];</span><br><span class="line">            <span class="keyword">return</span> ret;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="829-Consecutive-Numbers-Sum-AC"><a href="#829-Consecutive-Numbers-Sum-AC" class="headerlink" title="829. Consecutive Numbers Sum [AC]"></a>829. Consecutive Numbers Sum [AC]</h2><blockquote>
+<p><a href="https://leetcode.com/contest/weekly-contest-83/problems/consecutive-numbers-sum/" target="_blank" rel="noopener">Leetcode 829</a></p>
+</blockquote>
+<p>Given a positive integer N, how many ways can we write it as a sum of consecutive positive integers?</p>
+<p>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: 5</span><br><span class="line">Output: 2</span><br><span class="line">Explanation: 5 = 5 = 2 + 3</span><br></pre></td></tr></table></figure></p>
+<p>Example 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: 9</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: 9 = 9 = 4 + 5 = 2 + 3 + 4</span><br></pre></td></tr></table></figure></p>
+<p>Example 3:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: 15</span><br><span class="line">Output: 4</span><br><span class="line">Explanation: 15 = 15 = 8 + 7 = 4 + 5 + 6 = 1 + 2 + 3 + 4 + 5</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">consecutiveNumbersSum</span><span class="params">(<span class="keyword">int</span> N)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> ret = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; <span class="number">2</span> * N - i * (i - <span class="number">1</span>) &gt; <span class="number">0</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> ((<span class="number">2</span> * N - i * (i - <span class="number">1</span>)) % (<span class="number">2</span> * i) == <span class="number">0</span>) ret ++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="828-Unique-Letter-String-Unsolved"><a href="#828-Unique-Letter-String-Unsolved" class="headerlink" title="828. Unique Letter String [Unsolved]"></a>828. Unique Letter String [Unsolved]</h2><blockquote>
+<p><a href="https://leetcode.com/contest/weekly-contest-83/problems/unique-letter-string/" target="_blank" rel="noopener">Leetcode 828</a></p>
+</blockquote>
+<p>A character is unique in string S if it occurs exactly once in it.</p>
+<p>For example, in string S = “LETTER”, the only unique characters are “L” and “R”.</p>
+<p>Let’s define UNIQ(S) as the number of unique characters in string S.</p>
+<p>For example, UNIQ(“LETTER”) =  2.</p>
+<p>Given a string S with only uppercases, calculate the sum of UNIQ(substring) over all non-empty substrings of S.</p>
+<p>If there are two or more equal substrings at different positions in S, we consider them different.</p>
+<p>Since the answer can be very large, return the answer modulo 10 ^ 9 + 7.</p>
+<p>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;ABC&quot;</span><br><span class="line">Output: 10</span><br><span class="line">Explanation: All possible substrings are: &quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;AB&quot;,&quot;BC&quot; and &quot;ABC&quot;.</span><br><span class="line">Evey substring is composed with only unique letters.</span><br><span class="line">Sum of lengths of all substring is 1 + 1 + 1 + 2 + 2 + 3 = 10</span><br></pre></td></tr></table></figure></p>
+<p>Example 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;ABA&quot;</span><br><span class="line">Output: 8</span><br><span class="line">Explanation: The same as example 1, except uni(&quot;ABA&quot;) = 1.</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">uniqueLetterString</span><span class="params">(<span class="built_in">string</span> S)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> ret = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> n = S.size();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> l = i - <span class="number">1</span>, r = i + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (l &gt;= <span class="number">0</span> &amp;&amp; S[l] != S[i]) l--;</span><br><span class="line">            <span class="keyword">while</span> (r &lt; n &amp;&amp; S[r] != S[i]) r ++;</span><br><span class="line">            ret += (<span class="keyword">long</span> <span class="keyword">long</span>)(r - i) * (i - l);</span><br><span class="line">            <span class="comment">// 相乘表示从l-&gt;i和i-&gt;r所有子串的组合</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret % <span class="number">1000000007</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="Weekly-Contest-82"><a href="#Weekly-Contest-82" class="headerlink" title="Weekly Contest 82"></a>Weekly Contest 82</h1><h2 id="824-Goat-Latin-AC"><a href="#824-Goat-Latin-AC" class="headerlink" title="824. Goat Latin [AC]"></a>824. Goat Latin [AC]</h2><blockquote>
+<p><a href="https://leetcode.com/contest/weekly-contest-82/problems/goat-latin/" target="_blank" rel="noopener">Leetcode 824</a><br>A sentence S is given, composed of words separated by spaces. Each word consists of lowercase and uppercase letters only.</p>
+</blockquote>
+<p>We would like to convert the sentence to “Goat Latin” (a made-up language similar to Pig Latin.)</p>
+<p>The rules of Goat Latin are as follows:</p>
+<p>If a word begins with a vowel (a, e, i, o, or u), append “ma” to the end of the word.<br>For example, the word ‘apple’ becomes ‘applema’.</p>
+<p>If a word begins with a consonant (i.e. not a vowel), remove the first letter and append it to the end, then add “ma”.<br>For example, the word “goat” becomes “oatgma”.</p>
+<p>Add one letter ‘a’ to the end of each word per its word index in the sentence, starting with 1.<br>For example, the first word gets “a” added to the end, the second word gets “aa” added to the end and so on.<br>Return the final sentence representing the conversion from S to Goat Latin. </p>
+<p>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;I speak Goat Latin&quot;</span><br><span class="line">Output: &quot;Imaa peaksmaaa oatGmaaaa atinLmaaaaa&quot;</span><br></pre></td></tr></table></figure></p>
+<p>Example 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;The quick brown fox jumped over the lazy dog&quot;</span><br><span class="line">Output: &quot;heTmaa uickqmaaa rownbmaaaa oxfmaaaaa umpedjmaaaaaa overmaaaaaaa hetmaaaaaaaa azylmaaaaaaaaa ogdmaaaaaaaaaa&quot;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">helper</span><span class="params">(<span class="keyword">char</span> c)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (c == <span class="string">'a'</span> || c == <span class="string">'e'</span> || c == <span class="string">'i'</span> || c == <span class="string">'o'</span> || c == <span class="string">'u'</span> || c == <span class="string">'A'</span> || c == <span class="string">'E'</span> || c == <span class="string">'I'</span> || c == <span class="string">'O'</span> || c == <span class="string">'U'</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">toGoatLatin</span><span class="params">(<span class="built_in">string</span> S)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">string</span> ret;</span><br><span class="line">        <span class="built_in">string</span> ans;</span><br><span class="line">        <span class="keyword">int</span> cnt = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i : S) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i != <span class="string">' '</span>) &#123;</span><br><span class="line">                ans.push_back(i);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (ans.empty()) ans += <span class="string">" "</span>;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span> (helper(ans[<span class="number">0</span>])) &#123;</span><br><span class="line">                        ans += <span class="string">"ma"</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="keyword">char</span> t = ans[<span class="number">0</span>];</span><br><span class="line">                        ans.erase(ans.begin());</span><br><span class="line">                        ans.push_back(t);</span><br><span class="line">                        ans += <span class="string">"ma"</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; cnt; i++) &#123;</span><br><span class="line">                        ans += <span class="string">"a"</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    cnt ++;</span><br><span class="line">                &#125;</span><br><span class="line">                ret += <span class="string">" "</span> + ans;</span><br><span class="line">                ans = <span class="string">""</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (helper(ans[<span class="number">0</span>])) &#123;</span><br><span class="line">                ans += <span class="string">"ma"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">char</span> t = ans[<span class="number">0</span>];</span><br><span class="line">            ans.erase(ans.begin());</span><br><span class="line">            ans.push_back(t);</span><br><span class="line">            ans += <span class="string">"ma"</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; cnt; i++) &#123;</span><br><span class="line">            ans += <span class="string">"a"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ret += <span class="string">" "</span> + ans;</span><br><span class="line">        ans = <span class="string">""</span>;</span><br><span class="line">        ret.erase(ret.begin());</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="825-Friends-Of-Appropriate-Ages-AC"><a href="#825-Friends-Of-Appropriate-Ages-AC" class="headerlink" title="825. Friends Of Appropriate Ages [AC]"></a>825. Friends Of Appropriate Ages [AC]</h2><blockquote>
+<p><a href="https://leetcode.com/contest/weekly-contest-82/problems/friends-of-appropriate-ages/" target="_blank" rel="noopener">Leetcode 825</a></p>
+</blockquote>
+<p>Some people will make friend requests. The list of their ages is given and ages[i] is the age of the ith person. </p>
+<p>Person A will NOT friend request person B (B != A) if any of the following conditions are true:</p>
+<p>age[B] &lt;= 0.5 * age[A] + 7<br>age[B] &gt; age[A]<br>age[B] &gt; 100 &amp;&amp; age[A] &lt; 100<br>Otherwise, A will friend request B.</p>
+<p>Note that if A requests B, B does not necessarily request A.  Also, people will not friend request themselves.</p>
+<p>How many total friend requests are made?</p>
+<p>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: [16,16]</span><br><span class="line">Output: 2</span><br><span class="line">Explanation: 2 people friend request each other.</span><br></pre></td></tr></table></figure></p>
+<p>Example 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: [16,17,18]</span><br><span class="line">Output: 2</span><br><span class="line">Explanation: Friend requests are made 17 -&gt; 16, 18 -&gt; 17.</span><br></pre></td></tr></table></figure></p>
+<p>Example 3:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: [20,30,100,110,120]</span><br><span class="line">Output: </span><br><span class="line">Explanation: Friend requests are made 110 -&gt; 100, 120 -&gt; 110, 120 -&gt; 100.</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">helper</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> ((<span class="number">2</span> * b &lt;= a + <span class="number">14</span>) || b &gt; a || (b &gt; <span class="number">100</span> &amp;&amp; a &lt; <span class="number">100</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numFriendRequests</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; ages)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> n = ages.size();</span><br><span class="line">        sort(ages.begin(), ages.end());</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; n; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (helper(ages[j], ages[i])) &#123;</span><br><span class="line">                    <span class="built_in">cout</span> &lt;&lt; ages[j] &lt;&lt; ages[i] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">                    ret ++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (ret &amp;&amp; n == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="826-Most-Profit-Assigning-Work-AC"><a href="#826-Most-Profit-Assigning-Work-AC" class="headerlink" title="826. Most Profit Assigning Work [AC]"></a>826. Most Profit Assigning Work [AC]</h2><blockquote>
+<p><a href="https://leetcode.com/contest/weekly-contest-82/problems/most-profit-assigning-work/" target="_blank" rel="noopener">Leetcode 826</a></p>
+</blockquote>
+<p>We have jobs: difficulty[i] is the difficulty of the ith job, and profit[i] is the profit of the ith job. </p>
+<p>Now we have some workers. worker[i] is the ability of the ith worker, which means that this worker can only complete a job with difficulty at most worker[i]. </p>
+<p>Every worker can be assigned at most one job, but one job can be completed multiple times.</p>
+<p>For example, if 3 people attempt the same job that pays $1, then the total profit will be $3.  If a worker cannot complete any job, his profit is $0.</p>
+<p>What is the most profit we can make?</p>
+<p>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: difficulty = [2,4,6,8,10], profit = [10,20,30,40,50], worker = [4,5,6,7]</span><br><span class="line">Output: 100 </span><br><span class="line">Explanation: Workers are assigned jobs of difficulty [4,4,6,6] and they get profit of [20,20,30,30] seperately.</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfitAssignment</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; difficulty, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; profit, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; worker)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = worker.size(), m = profit.size();</span><br><span class="line">        <span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; nums;</span><br><span class="line">        <span class="keyword">if</span> (!n || !m) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">            nums.push_back(make_pair(difficulty[i], profit[i]));</span><br><span class="line">        &#125;</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        <span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> ans  = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; m; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (worker[i] &lt; nums[j].first) <span class="keyword">break</span>;</span><br><span class="line">                ans = max(ans, nums[j].second);</span><br><span class="line">            &#125;</span><br><span class="line">            ret += ans;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="827-Making-A-Large-Island-Unsolved"><a href="#827-Making-A-Large-Island-Unsolved" class="headerlink" title="827. Making A Large Island [Unsolved]"></a>827. Making A Large Island [Unsolved]</h2><blockquote>
+<p><a href="https://leetcode.com/contest/weekly-contest-82/problems/making-a-large-island/" target="_blank" rel="noopener">Leetcode 827</a></p>
+</blockquote>
+<p>In a 2D grid of 0s and 1s, we change at most one 0 to a 1.</p>
+<p>After, what is the size of the largest island? (An island is a 4-directionally connected group of 1s).</p>
+<p>Example 1:</p>
+<p>Input: [[1, 0], [0, 1]]<br>Output: 3<br>Explanation: Change one 0 to 1 and connect two 1s, then we get an island with area = 3.<br>Example 2:</p>
+<p>Input: [[1, 1], [1, 0]]<br>Output: 4<br>Explanation: Change the 0 to 1 and make the island bigger, only one island with area = 4.<br>Example 3:</p>
+<p>Input: [[1, 1], [1, 1]]<br>Output: 4<br>Explanation: Can’t change any 0 to 1, only one island with area = 4.</p>
+<blockquote>
+<p>本来思路是并查集加BFS，但是由于并查集写的代码太长导致时间不够用</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> N;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">largestIsland</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; grid)</span> </span>&#123;</span><br><span class="line">        N = grid.size();</span><br><span class="line">        <span class="comment">//DFS every island and give it an index of island</span></span><br><span class="line">        <span class="keyword">int</span> index = <span class="number">2</span>, res = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">unordered_map</span> &lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;area;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; N; ++x) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> y = <span class="number">0</span>; y &lt; N; ++y) &#123;</span><br><span class="line">                <span class="keyword">if</span> (grid[x][y] == <span class="number">1</span>) &#123;</span><br><span class="line">                    area[index] = dfs(grid, x, y, index);</span><br><span class="line">                    res = max(res, area[index++]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//traverse every 0 cell and count biggest island it can conntect</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; N; ++x) <span class="keyword">for</span> (<span class="keyword">int</span> y = <span class="number">0</span>; y &lt; N; ++y) <span class="keyword">if</span> (grid[x][y] == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="built_in">unordered_set</span>&lt;<span class="keyword">int</span>&gt; seen = &#123;&#125;;</span><br><span class="line">            <span class="keyword">int</span> cur = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> p : move(x, y)) &#123;</span><br><span class="line">                index = grid[p.first][p.second];</span><br><span class="line">                <span class="keyword">if</span> (index &gt; <span class="number">1</span> &amp;&amp; seen.count(index) == <span class="number">0</span>) &#123;</span><br><span class="line">                    seen.insert(index);</span><br><span class="line">                    cur += area[index];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            res = max(res, cur);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; move(<span class="keyword">int</span> x, <span class="keyword">int</span> y) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; res;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> p : <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; &#123;&#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">-1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>&#125;, &#123;<span class="number">0</span>, <span class="number">-1</span>&#125;&#125;) &#123;</span><br><span class="line">            <span class="keyword">if</span> (valid(x + p[<span class="number">0</span>], y + p[<span class="number">1</span>]))</span><br><span class="line">                res.push_back(make_pair(x + p[<span class="number">0</span>], y + p[<span class="number">1</span>]));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">valid</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span> &lt;= x &amp;&amp; x &lt; N &amp;&amp; <span class="number">0</span> &lt;= y &amp;&amp; y &lt; N;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; grid, <span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> area = <span class="number">0</span>;</span><br><span class="line">        grid[x][y] = index;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> p : move(x, y))</span><br><span class="line">            <span class="keyword">if</span> (grid[p.first][p.second] == <span class="number">1</span>)</span><br><span class="line">                area += dfs(grid, p.first, p.second, index);</span><br><span class="line">        <span class="keyword">return</span> area + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="Weekly-Contest-81"><a href="#Weekly-Contest-81" class="headerlink" title="Weekly Contest 81"></a>Weekly Contest 81</h1><h2 id="821-Shortest-Distance-to-a-Character-AC"><a href="#821-Shortest-Distance-to-a-Character-AC" class="headerlink" title="821. Shortest Distance to a Character [AC]"></a>821. Shortest Distance to a Character [AC]</h2><blockquote>
+<p><a href="https://leetcode.com/contest/weekly-contest-81/problems/shortest-distance-to-a-character/" target="_blank" rel="noopener">Leetcode 821</a><br>Given a string S and a character C, return an array of integers representing the shortest distance from the character C in the string.</p>
+</blockquote>
+<p>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: S = &quot;loveleetcode&quot;, C = &apos;e&apos;</span><br><span class="line">Output: [3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0]</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">     <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; shortestToChar(<span class="built_in">string</span> S, <span class="keyword">char</span> C) &#123;</span><br><span class="line">        <span class="keyword">int</span> n = S.size();</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res(n, n);</span><br><span class="line">        <span class="keyword">int</span> pos = -n;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (S[i] == C) pos = i;</span><br><span class="line">            res[i] = min(res[i], <span class="built_in">abs</span>(i - pos));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (S[i] == C)  pos = i;</span><br><span class="line">            res[i] = min(res[i], <span class="built_in">abs</span>(i - pos));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="822-822-Card-Flipping-Game-AC"><a href="#822-822-Card-Flipping-Game-AC" class="headerlink" title="822. 822. Card Flipping Game [AC]"></a>822. 822. Card Flipping Game [AC]</h2><blockquote>
+<p><a href="https://leetcode.com/contest/weekly-contest-81/problems/card-flipping-game/" target="_blank" rel="noopener">Leetcode 821</a></p>
+</blockquote>
+<p>On a table are N cards, with a positive integer printed on the front and back of each card (possibly different).</p>
+<p>We flip any number of cards, and after we choose one card. </p>
+<p>If the number X on the back of the chosen card is not on the front of any card, then this number X is good.</p>
+<p>What is the smallest number that is good?  If no number is good, output 0.</p>
+<p>Here, fronts[i] and backs[i] represent the number on the front and back of card i. </p>
+<p>A flip swaps the front and back numbers, so the value on the front is now on the back and vice versa.</p>
+<p>Example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: fronts = [1,2,4,4,7], backs = [1,3,4,1,3]</span><br><span class="line">Output: 2</span><br><span class="line">Explanation: If we flip the second card, the fronts are [1,3,4,4,7] and the backs are [1,2,4,1,3].</span><br><span class="line">We choose the second card, which has number 2 on the back, and it isn&apos;t on the front of any card, so 2 is good.</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">flipgame</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; fronts, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; backs)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">unordered_set</span>&lt;<span class="keyword">int</span>&gt; same;</span><br><span class="line">        <span class="keyword">int</span> n = fronts.size();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (fronts[i] == backs[i]) same.insert(fronts[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> ret = INT_MAX;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i : fronts) &#123;</span><br><span class="line">            <span class="keyword">if</span> (same.find(i) == same.end()) ret = min(ret, i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i : backs) &#123;</span><br><span class="line">            <span class="keyword">if</span> (same.find(i) == same.end()) ret = min(ret, i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret == INT_MAX ? <span class="number">0</span> : ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="820-Short-Encoding-of-Words-AC"><a href="#820-Short-Encoding-of-Words-AC" class="headerlink" title="820. Short Encoding of Words [AC]"></a>820. Short Encoding of Words [AC]</h2><blockquote>
+<p><a href="https://leetcode.com/contest/weekly-contest-81/problems/short-encoding-of-words/" target="_blank" rel="noopener">Leetcode 820</a><br>Given a list of words, we may encode it by writing a reference string S and a list of indexes A.</p>
+</blockquote>
+<p>For example, if the list of words is [“time”, “me”, “bell”], we can write it as S = “time#bell#” and indexes = [0, 2, 5].</p>
+<p>Then for each index, we will recover the word by reading from the reference string from that index until we reach a “#” character.</p>
+<p>What is the length of the shortest reference string S possible that encodes the given words?</p>
+<p>Example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: words = [&quot;time&quot;, &quot;me&quot;, &quot;bell&quot;]</span><br><span class="line">Output: 10</span><br><span class="line">Explanation: S = &quot;time#bell#&quot; and indexes = [0, 2, 5].</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minimumLengthEncoding</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; words)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">unordered_set</span>&lt;<span class="built_in">string</span>&gt; s(words.begin(), words.end());</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> w : words) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; w.size(); i++) &#123;</span><br><span class="line">                s.erase(w.substr(i));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i : s) ret += i.size() + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="823-Binary-Trees-With-Factors-AC"><a href="#823-Binary-Trees-With-Factors-AC" class="headerlink" title="823. Binary Trees With Factors [AC]"></a>823. Binary Trees With Factors [AC]</h2><blockquote>
+<p><a href="https://leetcode.com/contest/weekly-contest-81/problems/binary-trees-with-factors/" target="_blank" rel="noopener">Leetcode 823</a></p>
+</blockquote>
+<p>Given an array of unique integers, each integer is strictly greater than 1.</p>
+<p>We make a binary tree using these integers and each number may be used for any number of times.</p>
+<p>Each non-leaf node’s value should be equal to the product of the values of it’s children.</p>
+<p>How many binary trees can we make?  Return the answer modulo 10 ** 9 + 7.</p>
+<p>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: A = [2, 4]</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: We can make these trees: [2], [4], [4, 2, 2]</span><br></pre></td></tr></table></figure></p>
+<p>Example 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: A = [2, 4, 5, 10]</span><br><span class="line">Output: 7</span><br><span class="line">Explanation: We can make these trees: [2], [4], [5], [10], [4, 2, 2], [10, 2, 5], [10, 5, 2].</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">long</span> MOD = <span class="number">1000000007</span>;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numFactoredBinaryTrees</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; A)</span> </span>&#123;</span><br><span class="line">        sort(A.begin(), A.end());</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">long</span>&gt; m;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; A.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> x = A[i];</span><br><span class="line">            m[x] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">                <span class="keyword">int</span> y = A[j];</span><br><span class="line">                <span class="keyword">if</span> (x % y == <span class="number">0</span> &amp;&amp; m.find(x / y) != m.end()) &#123;</span><br><span class="line">                    m[x] = (m[x] + (m[y] * m[x / y]) % MOD) % MOD;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">long</span> ret = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i : m) &#123;</span><br><span class="line">            ret = (ret + i.second) % MOD;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="Weekly-Contest-80"><a href="#Weekly-Contest-80" class="headerlink" title="Weekly Contest 80"></a>Weekly Contest 80</h1><blockquote>
+<p><a href="https://leetcode.com/contest/weekly-contest-80/" target="_blank" rel="noopener">Leetcode 80</a></p>
+</blockquote>
+<h2 id="819-Most-Common-Word-AC"><a href="#819-Most-Common-Word-AC" class="headerlink" title="819. Most Common Word [AC]"></a>819. Most Common Word [AC]</h2><blockquote>
+<p><a href="https://leetcode.com/contest/weekly-contest-80/problems/most-common-word/" target="_blank" rel="noopener">Leetcode 819</a></p>
+</blockquote>
+<p>Given a paragraph and a list of banned words, return the most frequent word that is not in the list of banned words.  It is guaranteed there is at least one word that isn’t banned, and that the answer is unique.</p>
+<p>Words in the list of banned words are given in lowercase, and free of punctuation.  Words in the paragraph are not case sensitive.  The answer is in lowercase.</p>
+<p>Example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Input: </span><br><span class="line">paragraph = &quot;Bob hit a ball, the hit BALL flew far after it was hit.&quot;</span><br><span class="line">banned = [&quot;hit&quot;]</span><br><span class="line">Output: &quot;ball&quot;</span><br><span class="line">Explanation: </span><br><span class="line">&quot;hit&quot; occurs 3 times, but it is a banned word.</span><br><span class="line">&quot;ball&quot; occurs twice (and no other word does), so it is the most frequent non-banned word in the paragraph. </span><br><span class="line">Note that words in the paragraph are not case sensitive,</span><br><span class="line">that punctuation is ignored (even if adjacent to words, such as &quot;ball,&quot;), </span><br><span class="line">and that &quot;hit&quot; isn&apos;t the answer even though it occurs more because it is banned.</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; helper(<span class="built_in">string</span> s) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; ret;</span><br><span class="line">        <span class="built_in">string</span> ans;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i : s) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i == <span class="string">' '</span> || <span class="built_in">ispunct</span>(i)) &#123;</span><br><span class="line">                <span class="keyword">if</span> (ans != <span class="string">""</span>) &#123;</span><br><span class="line">                    ret.push_back(ans);</span><br><span class="line">                &#125;</span><br><span class="line">                ans = <span class="string">""</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (i &lt;= <span class="string">'Z'</span> &amp;&amp; i &gt;= <span class="string">'A'</span>) &#123;</span><br><span class="line">                    i = <span class="string">'a'</span> + (i - <span class="string">'A'</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                ans.push_back(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (ans != <span class="string">""</span>) ret.push_back(ans);</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">mostCommonWord</span><span class="params">(<span class="built_in">string</span> paragraph, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; banned)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">unordered_set</span>&lt;<span class="built_in">string</span>&gt; m(banned.begin(), banned.end());</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; cnt;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> s : helper(paragraph)) &#123;</span><br><span class="line">            <span class="keyword">if</span> (m.find(s) == m.end()) &#123;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">                cnt[s] ++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">string</span> ret;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i : cnt) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i.second &gt; ans) &#123;</span><br><span class="line">                ans = i.second;</span><br><span class="line">                ret = i.first;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="817-Linked-List-Components-AC"><a href="#817-Linked-List-Components-AC" class="headerlink" title="817. Linked List Components [AC]"></a>817. Linked List Components [AC]</h2><blockquote>
+<p><a href="https://leetcode.com/contest/weekly-contest-80/problems/linked-list-components/" target="_blank" rel="noopener">Leetcode 817</a></p>
+</blockquote>
+<p>We are given head, the head node of a linked list containing unique integer values.</p>
+<p>We are also given the list G, a subset of the values in the linked list.</p>
+<p>Return the number of connected components in G, where two values are connected if they appear consecutively in the linked list.</p>
+<p>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: </span><br><span class="line">head: 0-&gt;1-&gt;2-&gt;3</span><br><span class="line">G = [0, 1, 3]</span><br><span class="line">Output: 2</span><br><span class="line">Explanation: </span><br><span class="line">0 and 1 are connected, so [0, 1] and [3] are the two connected components.</span><br></pre></td></tr></table></figure></p>
+<p>Example 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: </span><br><span class="line">head: 0-&gt;1-&gt;2-&gt;3-&gt;4</span><br><span class="line">G = [0, 3, 1, 4]</span><br><span class="line">Output: 2</span><br><span class="line">Explanation: </span><br><span class="line">0 and 1 are connected, 3 and 4 are connected, so [0, 1] and [3, 4] are the two connected components.</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numComponents</span><span class="params">(ListNode* head, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; G)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!head) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">unordered_set</span>&lt;<span class="keyword">int</span>&gt; m(G.begin(), G.end());</span><br><span class="line">        <span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> check = <span class="number">0</span>;</span><br><span class="line">        ListNode* cur = head;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> x = cur-&gt;val;</span><br><span class="line">            <span class="keyword">if</span> (m.find(x) != m.end()) &#123;</span><br><span class="line">                check = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (check) &#123;    </span><br><span class="line">                    ret += <span class="number">1</span>, check = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            cur = cur-&gt;next;</span><br><span class="line">            <span class="keyword">if</span> (!cur) &#123;</span><br><span class="line">                <span class="keyword">if</span> (check) ret += <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="816-Ambiguous-Coordinates-AC"><a href="#816-Ambiguous-Coordinates-AC" class="headerlink" title="816. Ambiguous Coordinates [AC]"></a>816. Ambiguous Coordinates [AC]</h2><blockquote>
+<p><a href="https://leetcode.com/contest/weekly-contest-80/problems/ambiguous-coordinates/" target="_blank" rel="noopener">Leetcode 816</a></p>
+</blockquote>
+<p>We had some 2-dimensional coordinates, like “(1, 3)” or “(2, 0.5)”.  Then, we removed all commas, decimal points, and spaces, and ended up with the string S.  Return a list of strings representing all possibilities for what our original coordinates could have been.</p>
+<p>Our original representation never had extraneous zeroes, so we never started with numbers like “00”, “0.0”, “0.00”, “1.0”, “001”, “00.01”, or any other number that can be represented with less digits.  Also, a decimal point within a number never occurs without at least one digit occuring before it, so we never started with numbers like “.1”.</p>
+<p>The final answer list can be returned in any order.  Also note that all coordinates in the final answer have exactly one space between them (occurring after the comma.)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Example 1:</span><br><span class="line">Input: &quot;(123)&quot;</span><br><span class="line">Output: [&quot;(1, 23)&quot;, &quot;(12, 3)&quot;, &quot;(1.2, 3)&quot;, &quot;(1, 2.3)&quot;]</span><br><span class="line">Example 2:</span><br><span class="line">Input: &quot;(00011)&quot;</span><br><span class="line">Output:  [&quot;(0.001, 1)&quot;, &quot;(0, 0.011)&quot;]</span><br><span class="line">Explanation: </span><br><span class="line">0.0, 00, 0001 or 00.01 are not allowed.</span><br><span class="line">Example 3:</span><br><span class="line">Input: &quot;(0123)&quot;</span><br><span class="line">Output: [&quot;(0, 123)&quot;, &quot;(0, 12.3)&quot;, &quot;(0, 1.23)&quot;, &quot;(0.1, 23)&quot;, &quot;(0.1, 2.3)&quot;, &quot;(0.12, 3)&quot;]</span><br><span class="line">Example 4:</span><br><span class="line">Input: &quot;(100)&quot;</span><br><span class="line">Output: [(10, 0)]</span><br><span class="line">Explanation: </span><br><span class="line">1.0 is not allowed.</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; helper(<span class="built_in">string</span> s) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; ret;</span><br><span class="line">        <span class="keyword">if</span> (s == <span class="string">"0"</span>) <span class="keyword">return</span> <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;(&#123;<span class="string">"0"</span>&#125;);</span><br><span class="line">        <span class="keyword">if</span> (s[<span class="number">0</span>] == <span class="string">'0'</span> &amp;&amp; s.back() == <span class="string">'0'</span>) <span class="keyword">return</span> ret;</span><br><span class="line">        <span class="keyword">if</span> (s[<span class="number">0</span>] == <span class="string">'0'</span> &amp;&amp; s.back() != <span class="string">'0'</span>) &#123;</span><br><span class="line">            <span class="built_in">string</span> ans = <span class="string">"0."</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; s.size(); i++) &#123;</span><br><span class="line">                ans.push_back(s[i]);</span><br><span class="line">            &#125;</span><br><span class="line">            ret.push_back(ans);</span><br><span class="line">            <span class="keyword">return</span> ret;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (s[<span class="number">0</span>] != <span class="string">'0'</span> &amp;&amp; s.back() == <span class="string">'0'</span>) &#123;</span><br><span class="line">            ret.push_back(s);</span><br><span class="line">            <span class="keyword">return</span> ret;</span><br><span class="line">        &#125;</span><br><span class="line">        ret.push_back(s);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; s.size(); i++) &#123;</span><br><span class="line">            ret.push_back(s.substr(<span class="number">0</span>, i) + <span class="string">"."</span> + s.substr(i));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; ambiguousCoordinates(<span class="built_in">string</span> S) &#123;</span><br><span class="line">        S.pop_back();</span><br><span class="line">        S.erase(S.begin());</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; ret;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; S.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> a : helper(S.substr(<span class="number">0</span>, i))) &#123;</span><br><span class="line">                <span class="keyword">if</span> (a == <span class="string">""</span>) <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">auto</span> b : helper(S.substr(i))) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (b == <span class="string">""</span>) <span class="keyword">continue</span>;</span><br><span class="line">                    ret.push_back(<span class="string">"("</span> + a + <span class="string">", "</span> + b + <span class="string">")"</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="818-Race-Car-AC"><a href="#818-Race-Car-AC" class="headerlink" title="818. Race Car [AC]"></a>818. Race Car [AC]</h2><blockquote>
+<p><a href="https://leetcode.com/contest/weekly-contest-80/problems/race-car/" target="_blank" rel="noopener">Leetcode 818</a></p>
+</blockquote>
+<p>Your car starts at position 0 and speed +1 on an infinite number line.  (Your car can go into negative positions.)</p>
+<p>Your car drives automatically according to a sequence of instructions A (accelerate) and R (reverse).</p>
+<p>When you get an instruction “A”, your car does the following: position += speed, speed *= 2.</p>
+<p>When you get an instruction “R”, your car does the following: if your speed is positive then speed = -1 , otherwise speed = 1.  (Your position stays the same.)</p>
+<p>For example, after commands “AAR”, your car goes to positions 0-&gt;1-&gt;3-&gt;3, and your speed goes to 1-&gt;2-&gt;4-&gt;-1.</p>
+<p>Now for some target position, say the length of the shortest sequence of instructions to get there.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Example 1:</span><br><span class="line">Input: </span><br><span class="line">target = 3</span><br><span class="line">Output: 2</span><br><span class="line">Explanation: </span><br><span class="line">The shortest instruction sequence is &quot;AA&quot;.</span><br><span class="line">Your position goes from 0-&gt;1-&gt;3.</span><br><span class="line"></span><br><span class="line">Example 2:</span><br><span class="line">Input: </span><br><span class="line">target = 6</span><br><span class="line">Output: 5</span><br><span class="line">Explanation: </span><br><span class="line">The shortest instruction sequence is &quot;AAARA&quot;.</span><br><span class="line">Your position goes from 0-&gt;1-&gt;3-&gt;7-&gt;7-&gt;6.</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> dp[<span class="number">10001</span>];</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">racecar</span><span class="params">(<span class="keyword">int</span> t)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (dp[t] &gt; <span class="number">0</span>) <span class="keyword">return</span> dp[t];</span><br><span class="line">        <span class="keyword">int</span> n = <span class="built_in">floor</span>(log2(t)) + <span class="number">1</span>, res;</span><br><span class="line">        <span class="keyword">if</span> (<span class="number">1</span> &lt;&lt; n == t + <span class="number">1</span>) dp[t] = n;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            dp[t] = racecar((<span class="number">1</span> &lt;&lt; n) - <span class="number">1</span> - t) + n + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> m = <span class="number">0</span>; m &lt; n - <span class="number">1</span>; ++m)</span><br><span class="line">                dp[t] = min(dp[t], racecar(t - (<span class="number">1</span> &lt;&lt; (n - <span class="number">1</span>)) + (<span class="number">1</span> &lt;&lt; m)) + n + m + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[t];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>希望我的分享给你带来帮助</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="磊子 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Leetcode/" rel="tag"># Leetcode</a>
+          
+            <a href="/tags/周赛/" rel="tag"># 周赛</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/16/online-learning-algorithm-background-knowledge-ftrl-provement/" rel="next" title="由FTRL展开，在线梯度下降（OGD）理论基础以及与离线梯度下降算法等效性证明总结">
+                <i class="fa fa-chevron-left"></i> 由FTRL展开，在线梯度下降（OGD）理论基础以及与离线梯度下降算法等效性证明总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/14/interview-coding-bytedance/" rel="prev" title="【面经】今日头条部分编程算法题">
+                【面经】今日头条部分编程算法题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+  <div id="gitalk-container"></div>
+  
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/touxiang.png" alt="磊子">
+            
+              <p class="site-author-name" itemprop="name">磊子</p>
+              <p class="site-description motion-element" itemprop="description">家在水草丰茂的地方</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:wuzqbupt@gmail.com" target="_blank" title="邮件">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>邮件</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/wu-ze-qun" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/1922768971" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.linkedin.com/in/zequn-wu-038a5b133/" target="_blank" title="领英">
+                      
+                        <i class="fa fa-fw fa-linkedin"></i>领英</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Weekly-Contest-83"><span class="nav-number">1.</span> <span class="nav-text">Weekly Contest 83</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#830-Positions-of-Large-Groups-AC"><span class="nav-number">1.1.</span> <span class="nav-text">830. Positions of Large Groups [AC]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#831-Masking-Personal-Information-AC"><span class="nav-number">1.2.</span> <span class="nav-text">831. Masking Personal Information [AC]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#829-Consecutive-Numbers-Sum-AC"><span class="nav-number">1.3.</span> <span class="nav-text">829. Consecutive Numbers Sum [AC]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#828-Unique-Letter-String-Unsolved"><span class="nav-number">1.4.</span> <span class="nav-text">828. Unique Letter String [Unsolved]</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Weekly-Contest-82"><span class="nav-number">2.</span> <span class="nav-text">Weekly Contest 82</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#824-Goat-Latin-AC"><span class="nav-number">2.1.</span> <span class="nav-text">824. Goat Latin [AC]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#825-Friends-Of-Appropriate-Ages-AC"><span class="nav-number">2.2.</span> <span class="nav-text">825. Friends Of Appropriate Ages [AC]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#826-Most-Profit-Assigning-Work-AC"><span class="nav-number">2.3.</span> <span class="nav-text">826. Most Profit Assigning Work [AC]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#827-Making-A-Large-Island-Unsolved"><span class="nav-number">2.4.</span> <span class="nav-text">827. Making A Large Island [Unsolved]</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Weekly-Contest-81"><span class="nav-number">3.</span> <span class="nav-text">Weekly Contest 81</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#821-Shortest-Distance-to-a-Character-AC"><span class="nav-number">3.1.</span> <span class="nav-text">821. Shortest Distance to a Character [AC]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#822-822-Card-Flipping-Game-AC"><span class="nav-number">3.2.</span> <span class="nav-text">822. 822. Card Flipping Game [AC]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#820-Short-Encoding-of-Words-AC"><span class="nav-number">3.3.</span> <span class="nav-text">820. Short Encoding of Words [AC]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#823-Binary-Trees-With-Factors-AC"><span class="nav-number">3.4.</span> <span class="nav-text">823. Binary Trees With Factors [AC]</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Weekly-Contest-80"><span class="nav-number">4.</span> <span class="nav-text">Weekly Contest 80</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#819-Most-Common-Word-AC"><span class="nav-number">4.1.</span> <span class="nav-text">819. Most Common Word [AC]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#817-Linked-List-Components-AC"><span class="nav-number">4.2.</span> <span class="nav-text">817. Linked List Components [AC]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#816-Ambiguous-Coordinates-AC"><span class="nav-number">4.3.</span> <span class="nav-text">816. Ambiguous Coordinates [AC]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#818-Race-Car-AC"><span class="nav-number">4.4.</span> <span class="nav-text">818. Race Car [AC]</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">磊子</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1275919130&web_id=1275919130" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="/js/src/md5.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '98e280a7c5316f37a97c',
+          clientSecret: 'c8f7fc99393457e1bddcd61f40a8864fd354f1e2',
+          repo: 'blogcommet',
+          owner: 'wuleizi',
+          admin: ['wuleizi'],
+          id: md5(location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,Facebook,Linkedin,Reddit";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,Facebook,Linkedin,Reddit";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
