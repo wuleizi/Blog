@@ -2451,7 +2451,7 @@ int main() {
 ```
 
 ## 字符串乘法包含正负号
-cpp
+``` cpp
 #include <iostream>
 #include <algorithm>
 
@@ -2506,7 +2506,7 @@ int main() {
 ```
 
 ## csv parser
-
+```
 Input:	csvformat	
 John,Smith,john.smith@gmail.com,Los	Angeles,1	
 Jane,Roberts,janer@msn.com,"San	Francisco,	CA",0

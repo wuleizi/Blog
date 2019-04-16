@@ -1460,6 +1460,7 @@ Output: 8
 ```
 
 ``` cpp
+// 除此之外还有循环替换算法以及位操作算法
 class Solution {
 public:
     int missingNumber(vector<int>& nums) {
@@ -1620,6 +1621,7 @@ return 13.
 ```
 
 ``` cpp
+// upper_bound是找到大于该值的第一个数，lower_bound是找到大于等于该值的第一个数
 class Solution {
 public:
     int kthSmallest(vector<vector<int>>& matrix, int k) {
