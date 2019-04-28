@@ -448,6 +448,10 @@ Enjoy it!
 /etc/init.d/shadowsocks status
 ```
 
+> 2019-04-28更新
+另外，因为OVZ更新了，所以如果你使用的是KVM架构，也可以参考[搬瓦工](https://www.bandwagonhost.net/2144.html)这篇文章用渠道技术搞定IPV6
+
+
 ### 客户端
 [下载客户端](https://shadowsocks.org/en/download/clients.html)，然后根据服务器的配置，编辑端口和密码。同时，shadowsocks客户端可以设置PAC规则，节省转发流量，也可以在PAC文件中增加转发网址。设置好后可以访问ipv6和科学上网，可以[北邮人bt](http://bt.byr.cn)测试。
 ![bt](https://zhbbupt.github.io/images/bt.PNG)

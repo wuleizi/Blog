@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://theme-next.iissnan.com/uploads/five-minutes-setup/validation-default-scheme-mac.png">
 <meta property="og:image" content="https://zhbbupt.github.io/images/bt.PNG">
 <meta property="og:image" content="https://zhbbupt.github.io/images/utorrent.PNG">
-<meta property="og:updated_time" content="2019-04-28T05:31:07.206Z">
+<meta property="og:updated_time" content="2019-04-28T05:48:01.548Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="个人博客（hexo next）日志及校外ipv6 bt访问工具">
 <meta name="twitter:description" content="博客就是记录最近的工作，所以就把这个博客的搭建过程以及校外访问bt小工具的日志作为个人博客的第一篇。">
@@ -444,6 +444,9 @@
 <p>如果想卸载，可以执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./shadowsocks-go.sh uninstall</span><br></pre></td></tr></table></figure></p>
 <p>如果想要为多用户并行服务，可配置多转发端口，编辑<code>/etc/shadowsocks/config.json</code>:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;server&quot;:&quot;0.0.0.0&quot;,</span><br><span class="line">    &quot;port_password&quot;:&#123;</span><br><span class="line">         &quot;8989&quot;:&quot;password0&quot;,</span><br><span class="line">         &quot;9001&quot;:&quot;password1&quot;,</span><br><span class="line">         &quot;9002&quot;:&quot;password2&quot;,</span><br><span class="line">         &quot;9003&quot;:&quot;password3&quot;,</span><br><span class="line">         &quot;9004&quot;:&quot;password4&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;method&quot;:&quot;aes-256-cfb&quot;,</span><br><span class="line">    &quot;timeout&quot;:600</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>配置成功之后重启服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/shadowsocks start</span><br><span class="line">/etc/init.d/shadowsocks stop</span><br><span class="line">/etc/init.d/shadowsocks restart</span><br><span class="line">/etc/init.d/shadowsocks status</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>2019-04-28更新<br>另外，因为OVZ更新了，所以如果你使用的是KVM架构，也可以参考<a href="https://www.bandwagonhost.net/2144.html" target="_blank" rel="noopener">搬瓦工</a>这篇文章用渠道技术搞定IPV6</p>
+</blockquote>
 <h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><p><a href="https://shadowsocks.org/en/download/clients.html" target="_blank" rel="noopener">下载客户端</a>，然后根据服务器的配置，编辑端口和密码。同时，shadowsocks客户端可以设置PAC规则，节省转发流量，也可以在PAC文件中增加转发网址。设置好后可以访问ipv6和科学上网，可以<a href="http://bt.byr.cn" target="_blank" rel="noopener">北邮人bt</a>测试。<br><img src="https://zhbbupt.github.io/images/bt.PNG" alt="bt"></p>
 <h3 id="设置utorrent"><a href="#设置utorrent" class="headerlink" title="设置utorrent"></a>设置utorrent</h3><ul>
 <li>打开设置 -&gt; 连接</li>
@@ -609,7 +612,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
