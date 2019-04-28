@@ -461,3 +461,13 @@ Enjoy it!
 * 代理服务选择socks5，代理127.0.0.1，端口1080，勾选通过代理服务器解析主机名和 对于点对点连接使用代理服务器
 ![ut-setting](https://zhbbupt.github.io/images/utorrent.PNG)
 * 如果设置的系统代理方式为<code>PAC代理</code>，需要在PAC文件中加入<code>.byr,cn</code>。
+
+
+## 其余工具安装
+> 因为关于环境的安装都属于服务器运维相关的工作，所以将链接放到下面，以备以后使用
+
+### docker-ce
+因为使用的是搬瓦工，如果直接使用yum的docker版本会出现engine安装问题，所以使用[搬瓦工官方的处理方法](https://www.bandwagonhost.net/2163.html)
+
+### ngrok内网穿透工具
+当服务处于内网过程中，客户端无法直接访问接口，这时候需要使用NAT转换代理，除了使用Nginx做代理，还可以使用[Ngrok](https://segmentfault.com/a/1190000010338848)
