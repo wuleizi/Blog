@@ -437,6 +437,380 @@ int main() {
 }
 ```
 
+## 全排列
+### 打印数组的全排列
+
+``` cpp
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+void dfs(string s, int index, vector<string>& ret) {
+    int n = s.size();
+    if (index == n - 1) {
+        ret.push_back(s);
+        return;
+    }
+
+    for (int i = index; i < n; i++) {
+        if (index != i && s[i] == s[index]) continue;
+        swap(s[index], s[i]);
+        dfs(s, index + 1, ret);
+    }
+
+}
+
+vector<string> helper(string s) {
+    vector<string> ret;
+    if (s.empty()) return ret;
+    sort(s.begin(), s.end());
+    dfs(s, 0, ret);
+    return ret;
+}
+
+int main() {
+    string s;
+    cin >> s;
+    for (auto i : helper(s)) {
+        cout << i << endl;
+    }
+    return 0;
+}
+```
+
+
+### 打印n个字符串的全排列第K个值（全排列个数不会溢出情况）
+``` cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+string helper(int n, int k) {
+    vector<long long> fac(n, 1);
+    vector<int> nums(n, 0);
+    for (int i = 1; i < n; i++) {
+        fac[i] = fac[i - 1] * i;
+    }
+    for (int i = 0; i < n; i++) {
+        nums[i] = i + 1;
+    }
+    string ret;
+    for (int i = 0; i < n; i++) {
+        int index = (k - 1) / fac[n - i - 1];
+        ret += to_string(nums[index]);
+        nums.erase(nums.begin() + index);
+        k -= index * fac[n - i - 1];
+    }
+    return ret;
+}
+
+int main() {
+    int n, k;
+    cin >> n >> k;
+    cout << helper(n, k) << endl;
+    return 0;
+}
+```
+
+### 打印n个字符串的全排列第K个值（全排列个数会溢出情况）
+> [Leetcode 31](https://leetcode.com/problems/next-permutation/)
+> 参考全排列的算法，也可以参考[next permutation](https://www.cnblogs.com/grandyang/p/4428207.html)
+
+``` cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cstring>
+using namespace std;
+void next_permutation(string& s) {
+    int n = s.size();
+    int i = n - 2;
+    while (i >= 0 && s[i] >= s[i + 1]) i--;
+    if (i >= 0) {
+        int j = n - 1;
+        while (s[j] <= s[i]) j --;
+        swap(s[j], s[i]);
+    }
+    reverse(s.begin() + i + 1, s.end());
+    // 如果reverse放在外面，则会无限循环，当整体已经处于降序的情况下，reverse会变成升序，此时就会变成全排列的第一个
+}
+
+string helper(int n, int k) {
+    string ret;
+    for (int i = 1; i <= n; i++) {
+        ret = ret + to_string(i);;
+    }
+    for (int i = 0; i < k - 1; i++) {
+        next_permutation(ret);
+    }
+    return ret;
+}
+
+int main() {
+    int n, k;
+    cin >> n >> k;
+    cout << helper(n, k) << endl;
+    return 0;
+}
+```
 
 
 
+
+## ransom note
+> 验证地址[Leetcode 383](https://leetcode.com/problems/ransom-note/)
+
+``` cpp
+class Solution {
+public:
+    bool canConstruct(string ransomNote, string magazine) {
+        unordered_map<char, int> m;
+        for (auto i : magazine) m[i]++;
+        for (auto i : ransomNote) {
+            if (-- m[i] < 0) return false;
+        }
+        return true;
+    }
+};
+```
+
+## logger rate limiter(待付费)
+> 验证地址[Leetcode 359](https://leetcode.com/problems/logger-rate-limiter/)
+
+``` cpp
+class Logger {
+private:
+    unordered_map<string, int> m;
+public:
+    Logger() {}
+    bool shouldPrintMessage(int timestamp, string message) {
+        bool ret = true;
+        if (m.find(message) != m.end() && m[message] >= timestamp - 10) {
+            ret = false;
+        } 
+        m[message] = timestamp;
+        return ret;
+    }
+};
+```
+
+## Snakes and Ladders
+> 验证地址[Leetcode 909](https://leetcode.com/problems/snakes-and-ladders/)
+``` cpp
+class Solution {
+public:
+    int snakesAndLadders(vector<vector<int>>& board) {
+        unordered_set<int> m;
+        int ret = 0, n = board.size();
+        unordered_set<int> cur({1});
+        while (true) {
+            unordered_set<int> next;
+            for (auto i : cur) {
+                m.insert(i);
+                if (i == n * n) return ret;
+                for (int j = 1; j <= 6; j++) {
+                    int index = j + i;
+                    if (index > n * n) continue;
+                    int a = (index - 1) / n, b = (index - 1) % n;
+                    int temp = board[n - a - 1][a % 2 ? n - 1 - b : b];
+                    if (temp > 0) index = temp;
+                    if (m.find(index) == m.end()) next.insert(index);
+                }
+            }
+            if (next.empty()) break;
+            cur = next;
+            ret ++;
+        }
+        return -1;
+    }
+};
+```
+
+
+## Spirally traversing a matrix
+> 验证地址[geeksforgeeks](https://practice.geeksforgeeks.org/problems/spirally-traversing-a-matrix/0)
+``` cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+void helper(vector<vector<int>>& nums) {
+    if (nums.empty() || nums[0].empty()) return;
+    int m = nums.size(), n = nums[0].size();
+    int a[4] = {0, 1, 0, -1}, b[4] = {1, 0, -1, 0};
+    int i = 0, j = 0;
+    int cnt = 0;
+    int dir = 0;
+    while (cnt < m * n) {
+        cout << nums[i][j] << " ";
+        nums[i][j] = -1;
+        cnt ++;
+        i += a[dir];
+        j += b[dir];
+        if (i < m && i >= 0 && j < n && j >= 0 && nums[i][j] >= 0);
+        else {
+            i -= a[dir];
+            j -= b[dir];
+            dir = (dir + 1) % 4;
+            i += a[dir];
+            j += b[dir];
+        }
+    }
+    cout << endl;
+}
+
+int main() {
+	int t;
+	cin >> t;
+	for (int i = 0; i < t; i++) {
+	    int m, n;
+	    cin >> m >> n;
+	    vector<vector<int>> nums(m, vector<int>(n, 0));
+	    for (int i = 0; i < m; i++) {
+	        for (int j = 0; j < n; j++) {
+	            cin >> nums[i][j];
+	        }
+	    }
+	    helper(nums);
+	}
+	return 0;
+}
+```
+
+## Encode and Decode TinyURL
+> 验证地址[Leetcode 535](https://leetcode.com/problems/encode-and-decode-tinyurl/)
+
+``` cpp
+// 思路：
+// 0-9a-zA-Z一共是62个字母，所以全局有一个cnt表示已经有多少个网址，
+// 然后将这个cnt变成62进制数，每一位对应到62个字母中的其中一个，就是编码过程，然后存下来
+// 因为每一个网址都是唯一的自增id，所以肯定能保证在O(1)时间里面生成唯一短网址
+// 解码过程就是将提取下来的数
+class Solution {
+private:
+    unordered_map<string, string> m;
+    long long cnt;
+    unordered_map<char, int> dict;
+public:
+    Solution(): cnt(0) {
+        int index = 0;
+        for (char i = '0'; i <= '9'; i++) dict[i] = index++;
+        for (char i = 'a'; i <= 'z'; i++) dict[i] = index++;
+        for (char i = 'A'; i <= 'Z'; i++) dict[i] = index++;
+    }
+    
+    // Encodes a URL to a shortened URL.
+    string encode(string longUrl) {
+        cnt ++;
+        long long ans = cnt;
+        string ret;
+        while (ans) {
+            ret.push_back(dict[ans % 62]);
+            ans /= 62;
+        }
+        m[ret] = longUrl;
+        return ret;
+    }
+
+    // Decodes a shortened URL to its original URL.
+    string decode(string shortUrl) {
+        if (m.find(shortUrl) == m.end()) return "";
+        else return m[shortUrl];
+    }
+};
+
+// Your Solution object will be instantiated and called as such:
+// Solution solution;
+// solution.decode(solution.encode(url));
+```
+
+## XML转化成Tree/JSON
+``` cpp
+#include <iostream>
+#include <vector>
+
+
+using namespace std;
+
+class Node {
+public:
+    string key;
+    string val;
+    vector<Node*> child;
+    Node(string x): key(x), val("") {}
+};
+
+Node* convert(string s, int& index) {
+    string key;
+    int n = s.size();
+    // if (index >= n || s[index] != '<') throw "Format Error";
+    while (index < n && s[index] != '<') index ++;
+    index ++;
+    while (index < n && s[index] != '>') key.push_back(s[index ++]);
+    index ++;
+    Node* ret = new Node(key);
+    cout << key << endl;
+    string val;
+    while (index < n - 1 && !(s[index] == '<' && s[index + 1] == '/')) {
+        while (index < n && s[index] == ' ') index ++;
+        if (s[index] == '<') {
+            index --;
+            ret->child.push_back(convert(s, index));
+        }
+        else {
+            val.push_back(s[index ++]);
+        }
+    }
+    cout << val << endl;
+    while (index < n && s[index] != '>') index ++;
+    index ++; 
+    if (ret->child.empty()) ret->val = val;
+    return ret;
+
+}
+
+string dfs(Node* root) {
+    if (!root) return "";
+    string ret = "{";
+    ret += " " + root->key + ": ";
+    if (root->child.empty()) ret += "\"" + root->val + "\"";
+    else {
+        for (auto i : root->child) {
+            ret += dfs(i) + ", ";
+        }
+        ret.pop_back();
+        ret.pop_back();
+    }
+    ret += " }";
+    return ret;
+}
+
+string helper(string s) {
+    int n = s.size();
+    int index = 0;
+    while (index < n && s[index] == ' ') index++;
+    if (index == n) return "";
+    Node* root = convert(s, index);
+    return dfs(root);
+}
+
+int main() {
+    string s = "<note><plus> <to>George</to></plus> <from>John</from><heading>Reminder</heading><body>Don't forget the meeting!</body></note>";
+    cout << helper(s) << endl;;
+    return 0;
+}
+```
+
+## bitcoin trading
+```
+Question:
+You know the daily prices of Bitcoin (BTC), and you traveled back to 1 year ago. 
+The BTC exchange was highly regulated and you can only do one of (a) BUY, (b) HOLD, and (c) SELL, per day. 
+You can trade one BTC per day.
+You can not sell BTC that you don't own - no shorts or derivatives.
+You have unlimited cash
+Maximize your profit for this year
+```
+
+> 参考[Leetcode ]

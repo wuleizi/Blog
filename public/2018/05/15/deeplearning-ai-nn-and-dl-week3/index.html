@@ -441,24 +441,7 @@
 The shape of Y is: (1, 400)
 I have m = 400 training examples!
 </code></pre><p><strong>Expected Output</strong>:</p>
-<table style="width:20%">
-
-  <tr>
-    <td>**shape of X**</td>
-    <td> (2, 400) </td> 
-  </tr>
-
-  <tr>
-    <td>**shape of Y**</td>
-    <td>(1, 400) </td> 
-  </tr>
-
-    <tr>
-    <td>**m**</td>
-    <td> 400 </td> 
-  </tr>
-
-</table>
+<table style="width:20%"><br><br>  <tr><br>    <td><strong>shape of X</strong></td><br>    <td> (2, 400) </td><br>  </tr><br><br>  <tr><br>    <td><strong>shape of Y</strong></td><br>    <td>(1, 400) </td><br>  </tr><br><br>    <tr><br>    <td><strong>m</strong></td><br>    <td> 400 </td><br>  </tr><br><br></table>
 
 <h4 id="3-Simple-Logistic-Regression"><a href="#3-Simple-Logistic-Regression" class="headerlink" title="3 - Simple Logistic Regression"></a>3 - Simple Logistic Regression</h4><p>Before building a full neural network, lets first see how logistic regression performs on this problem. You can use sklearn’s built-in functions to do that. Run the code below to train a logistic regression classifier on the dataset.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Train the logistic regression classifier</span></span><br><span class="line">clf = sklearn.linear_model.LogisticRegressionCV();</span><br><span class="line">clf.fit(X.T, Y.T);</span><br></pre></td></tr></table></figure>
@@ -469,24 +452,18 @@ I have m = 400 training examples!
 <pre><code>Accuracy of logistic regression: 47 % (percentage of correctly labelled datapoints)
 </code></pre><p><img src="/2018/05/15/deeplearning-ai-nn-and-dl-week3/output_13_1.png" alt="png"></p>
 <p><strong>Expected Output</strong>:</p>
-<table style="width:20%">
-  <tr>
-    <td>**Accuracy**</td>
-    <td> 47% </td> 
-  </tr>
-
-</table>
+<table style="width:20%"><br>  <tr><br>    <td><strong>Accuracy</strong></td><br>    <td> 47% </td><br>  </tr><br><br></table>
 
 
 <p><strong>Interpretation</strong>: The dataset is not linearly separable, so logistic regression doesn’t perform well. Hopefully a neural network will do better. Let’s try this now! </p>
 <h4 id="4-Neural-Network-model"><a href="#4-Neural-Network-model" class="headerlink" title="4 - Neural Network model"></a>4 - Neural Network model</h4><p>Logistic regression did not work well on the “flower dataset”. You are going to train a Neural Network with a single hidden layer.</p>
 <p><strong>Here is our model</strong>:<br><img src="/2018/05/15/deeplearning-ai-nn-and-dl-week3/classification_kiank.png" style="width:600px;height:300px;"></p>
 <p><strong>Mathematically</strong>:</p>
-<p>For one example $x^{(i)}$:</p>
-<script type="math/tex; mode=display">z^{[1] (i)} =  W^{[1]} x^{(i)} + b^{[1]}\tag{1}</script><script type="math/tex; mode=display">a^{[1] (i)} = \tanh(z^{[1] (i)})\tag{2}</script><script type="math/tex; mode=display">z^{[2] (i)} = W^{[2]} a^{[1] (i)} + b^{[2]}\tag{3}</script><script type="math/tex; mode=display">\hat{y}^{(i)} = a^{[2] (i)} = \sigma(z^{ [2] (i)})\tag{4}</script><script type="math/tex; mode=display">y^{(i)}_{prediction} = \begin{cases} 1 & \mbox{if } a^{[2](i)} > 0.5 \\ 0 & \mbox{otherwise } \end{cases}\tag{5}</script><p>Given the predictions on all the examples, you can also compute the cost $J$ as follows: </p>
-<script type="math/tex; mode=display">J = - \frac{1}{m} \sum\limits_{i = 0}^{m} \large\left(\small y^{(i)}\log\left(a^{[2] (i)}\right) + (1-y^{(i)})\log\left(1- a^{[2] (i)}\right)  \large  \right) \small \tag{6}</script><p><strong>Reminder</strong>: The general methodology to build a Neural Network is to:</p>
+<p>For one example $x^{(i)}$:<br>$$z^{[1] (i)} =  W^{[1]} x^{(i)} + b^{[1]}\tag{1}$$<br>$$a^{[1] (i)} = \tanh(z^{[1] (i)})\tag{2}$$<br>$$z^{[2] (i)} = W^{[2]} a^{[1] (i)} + b^{[2]}\tag{3}$$<br>$$\hat{y}^{(i)} = a^{[2] (i)} = \sigma(z^{ [2] (i)})\tag{4}$$<br>$$y^{(i)}_{prediction} = \begin{cases} 1 &amp; \mbox{if } a^{<a href="i">2</a>} &gt; 0.5 \ 0 &amp; \mbox{otherwise } \end{cases}\tag{5}$$</p>
+<p>Given the predictions on all the examples, you can also compute the cost $J$ as follows:<br>$$J = - \frac{1}{m} \sum\limits_{i = 0}^{m} \large\left(\small y^{(i)}\log\left(a^{[2] (i)}\right) + (1-y^{(i)})\log\left(1- a^{[2] (i)}\right)  \large  \right) \small \tag{6}$$</p>
+<p><strong>Reminder</strong>: The general methodology to build a Neural Network is to:</p>
 <pre><code>1. Define the neural network structure ( # of input units,  # of hidden units, etc). 
-2. Initialize the model&#39;s parameters
+2. Initialize the model&apos;s parameters
 3. Loop:
     - Implement forward propagation
     - Compute loss
@@ -504,23 +481,7 @@ I have m = 400 training examples!
 The size of the hidden layer is: n_h = 4
 The size of the output layer is: n_y = 2
 </code></pre><p><strong>Expected Output</strong> (these are not the sizes you will use for your network, they are just used to assess the function you’ve just coded).</p>
-<table style="width:20%">
-  <tr>
-    <td>**n_x**</td>
-    <td> 5 </td> 
-  </tr>
-
-    <tr>
-    <td>**n_h**</td>
-    <td> 4 </td> 
-  </tr>
-
-    <tr>
-    <td>**n_y**</td>
-    <td> 2 </td> 
-  </tr>
-
-</table>
+<table style="width:20%"><br>  <tr><br>    <td><strong>n_x</strong></td><br>    <td> 5 </td><br>  </tr><br><br>    <tr><br>    <td><strong>n_h</strong></td><br>    <td> 4 </td><br>  </tr><br><br>    <tr><br>    <td><strong>n_y</strong></td><br>    <td> 2 </td><br>  </tr><br><br></table>
 
 <h5 id="4-2-Initialize-the-model’s-parameters"><a href="#4-2-Initialize-the-model’s-parameters" class="headerlink" title="4.2 - Initialize the model’s parameters"></a>4.2 - Initialize the model’s parameters</h5><p><strong>Exercise</strong>: Implement the function <code>initialize_parameters()</code>.</p>
 <p><strong>Instructions</strong>:</p>
@@ -548,36 +509,8 @@ b1 = [[ 0.]
 W2 = [[-0.01057952 -0.00909008  0.00551454  0.02292208]]
 b2 = [[ 0.]]
 </code></pre><p><strong>Expected Output</strong>:</p>
-<table style="width:90%">
-  <tr>
-    <td>*
-    *W1**</td>
-    <td> [[-0.00416758 -0.00056267]
- [-0.02136196  0.01640271]
- [-0.01793436 -0.00841747]
- [ 0.00502881 -0.01245288]] </td> 
-  </tr>
-
-  <tr>
-    <td>**b1**</td>
-    <td> [[ 0.]
- [ 0.]
- [ 0.]
- [ 0.]] </td> 
-  </tr>
-
-  <tr>
-    <td>**W2**</td>
-    <td> [[-0.01057952 -0.00909008  0.00551454  0.02292208]]</td> 
-  </tr>
-
-
-  <tr>
-    <td>**b2**</td>
-    <td> [[ 0.]] </td> 
-  </tr>
-
-</table>
+<table style="width:90%"><br>  <tr><br>    <td><em>
+    </em>W1<strong></strong></td><br>    <td> [[-0.00416758 -0.00056267]<br> [-0.02136196  0.01640271]<br> [-0.01793436 -0.00841747]<br> [ 0.00502881 -0.01245288]] </td><br>  </tr><br><br>  <tr><br>    <td>b1<strong></strong></td><br>    <td> [[ 0.]<br> [ 0.]<br> [ 0.]<br> [ 0.]] </td><br>  </tr><br><br>  <tr><br>    <td>W2<strong></strong></td><br>    <td> [[-0.01057952 -0.00909008  0.00551454  0.02292208]]</td><br>  </tr><br><br><br>  <tr><br>    <td>b2**</td><br>    <td> [[ 0.]] </td><br>  </tr><br><br></table>
 
 
 
@@ -598,14 +531,11 @@ b2 = [[ 0.]]
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">X_assess, parameters = forward_propagation_test_case()</span><br><span class="line">A2, cache = forward_propagation(X_assess, parameters)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Note: we use the mean here just to make sure that your output matches ours. </span></span><br><span class="line">print(np.mean(cache[<span class="string">'Z1'</span>]) ,np.mean(cache[<span class="string">'A1'</span>]),np.mean(cache[<span class="string">'Z2'</span>]),np.mean(cache[<span class="string">'A2'</span>]))</span><br></pre></td></tr></table></figure>
 <pre><code>0.262818640198 0.091999045227 -1.30766601287 0.212877681719
 </code></pre><p><strong>Expected Output</strong>:</p>
-<table style="width:50%">
-  <tr>
-    <td> 0.262818640198 0.091999045227 -1.30766601287 0.212877681719 </td> 
-  </tr>
-</table>
+<table style="width:50%"><br>  <tr><br>    <td> 0.262818640198 0.091999045227 -1.30766601287 0.212877681719 </td><br>  </tr><br></table>
 
 <p>Now that you have computed $A^{[2]}$ (in the Python variable “<code>A2</code>“), which contains $a^{<a href="i">2</a>}$ for every example, you can compute the cost function as follows:</p>
-<script type="math/tex; mode=display">J = - \frac{1}{m} \sum\limits_{i = 0}^{m} \large{(} \small y^{(i)}\log\left(a^{[2] (i)}\right) + (1-y^{(i)})\log\left(1- a^{[2] (i)}\right) \large{)} \small\tag{13}</script><p><strong>Exercise</strong>: Implement <code>compute_cost()</code> to compute the value of the cost $J$.</p>
+<p>$$J = - \frac{1}{m} \sum\limits_{i = 0}^{m} \large{(} \small y^{(i)}\log\left(a^{[2] (i)}\right) + (1-y^{(i)})\log\left(1- a^{[2] (i)}\right) \large{)} \small\tag{13}$$</p>
+<p><strong>Exercise</strong>: Implement <code>compute_cost()</code> to compute the value of the cost $J$.</p>
 <p><strong>Instructions</strong>:</p>
 <ul>
 <li>There are many ways to implement the cross-entropy loss. To help you, we give you how we would have implemented<br>$- \sum\limits_{i=0}^{m}  y^{(i)}\log(a^{<a href="i">2</a>})$:<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">logprobs = np.multiply(np.log(A2),Y)</span><br><span class="line">cost = - np.sum(logprobs)                <span class="comment"># no need to use a for loop!</span></span><br></pre></td></tr></table></figure>
@@ -616,13 +546,7 @@ b2 = [[ 0.]]
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A2, Y_assess, parameters = compute_cost_test_case()</span><br><span class="line"></span><br><span class="line">print(<span class="string">"cost = "</span> + str(compute_cost(A2, Y_assess, parameters)))</span><br></pre></td></tr></table></figure>
 <pre><code>cost = 0.693058761039
 </code></pre><p><strong>Expected Output</strong>:</p>
-<table style="width:20%">
-  <tr>
-    <td>**cost**</td>
-    <td> 0.693058761... </td> 
-  </tr>
-
-</table>
+<table style="width:20%"><br>  <tr><br>    <td><strong>cost</strong></td><br>    <td> 0.693058761… </td><br>  </tr><br><br></table>
 
 <p>Using the cache computed during forward propagation, you can now implement backward propagation.</p>
 <p><strong>Question</strong>: Implement the function <code>backward_propagation()</code>.</p>
@@ -668,35 +592,7 @@ db1 = [[ 0.00176201]
 dW2 = [[ 0.00078841  0.01765429 -0.00084166 -0.01022527]]
 db2 = [[-0.16655712]]
 </code></pre><p><strong>Expected output</strong>:</p>
-<table style="width:80%">
-  <tr>
-    <td>**dW1**</td>
-    <td> [[ 0.00301023 -0.00747267]
- [ 0.00257968 -0.00641288]
- [-0.00156892  0.003893  ]
- [-0.00652037  0.01618243]] </td> 
-  </tr>
-
-  <tr>
-    <td>**db1**</td>
-    <td>  [[ 0.00176201]
- [ 0.00150995]
- [-0.00091736]
- [-0.00381422]] </td> 
-  </tr>
-
-  <tr>
-    <td>**dW2**</td>
-    <td> [[ 0.00078841  0.01765429 -0.00084166 -0.01022527]] </td> 
-  </tr>
-
-
-  <tr>
-    <td>**db2**</td>
-    <td> [[-0.16655712]] </td> 
-  </tr>
-
-</table>  
+<table style="width:80%"><br>  <tr><br>    <td><strong>dW1</strong></td><br>    <td> [[ 0.00301023 -0.00747267]<br> [ 0.00257968 -0.00641288]<br> [-0.00156892  0.003893  ]<br> [-0.00652037  0.01618243]] </td><br>  </tr><br><br>  <tr><br>    <td><strong>db1</strong></td><br>    <td>  [[ 0.00176201]<br> [ 0.00150995]<br> [-0.00091736]<br> [-0.00381422]] </td><br>  </tr><br><br>  <tr><br>    <td><strong>dW2</strong></td><br>    <td> [[ 0.00078841  0.01765429 -0.00084166 -0.01022527]] </td><br>  </tr><br><br><br>  <tr><br>    <td><strong>db2</strong></td><br>    <td> [[-0.16655712]] </td><br>  </tr><br><br></table>  
 
 <p><strong>Question</strong>: Implement the update rule. Use gradient descent. You have to use (dW1, db1, dW2, db2) in order to update (W1, b1, W2, b2).</p>
 <p><strong>General gradient descent rule</strong>: $ \theta = \theta - \alpha \frac{\partial J }{ \partial \theta }$ where $\alpha$ is the learning rate and $\theta$ represents a parameter.</p>
@@ -715,35 +611,7 @@ b1 = [[ -1.02420756e-06]
 W2 = [[-0.01041081 -0.04463285  0.01758031  0.04747113]]
 b2 = [[ 0.00010457]]
 </code></pre><p><strong>Expected Output</strong>:</p>
-<table style="width:80%">
-  <tr>
-    <td>**W1**</td>
-    <td> [[-0.00643025  0.01936718]
- [-0.02410458  0.03978052]
- [-0.01653973 -0.02096177]
- [ 0.01046864 -0.05990141]]</td> 
-  </tr>
-
-  <tr>
-    <td>**b1**</td>
-    <td> [[ -1.02420756e-06]
- [  1.27373948e-05]
- [  8.32996807e-07]
- [ -3.20136836e-06]]</td> 
-  </tr>
-
-  <tr>
-    <td>**W2**</td>
-    <td> [[-0.01041081 -0.04463285  0.01758031  0.04747113]] </td> 
-  </tr>
-
-
-  <tr>
-    <td>**b2**</td>
-    <td> [[ 0.00010457]] </td> 
-  </tr>
-
-</table>  
+<table style="width:80%"><br>  <tr><br>    <td><strong>W1</strong></td><br>    <td> [[-0.00643025  0.01936718]<br> [-0.02410458  0.03978052]<br> [-0.01653973 -0.02096177]<br> [ 0.01046864 -0.05990141]]</td><br>  </tr><br><br>  <tr><br>    <td><strong>b1</strong></td><br>    <td> [[ -1.02420756e-06]<br> [  1.27373948e-05]<br> [  8.32996807e-07]<br> [ -3.20136836e-06]]</td><br>  </tr><br><br>  <tr><br>    <td><strong>W2</strong></td><br>    <td> [[-0.01041081 -0.04463285  0.01758031  0.04747113]] </td><br>  </tr><br><br><br>  <tr><br>    <td><strong>b2</strong></td><br>    <td> [[ 0.00010457]] </td><br>  </tr><br><br></table>  
 
 <h5 id="4-4-Integrate-parts-4-1-4-2-and-4-3-in-nn-model"><a href="#4-4-Integrate-parts-4-1-4-2-and-4-3-in-nn-model" class="headerlink" title="4.4 - Integrate parts 4.1, 4.2 and 4.3 in nn_model()"></a>4.4 - Integrate parts 4.1, 4.2 and 4.3 in nn_model()</h5><p><strong>Question</strong>: Build your neural network model in <code>nn_model()</code>.</p>
 <p><strong>Instructions</strong>: The neural network model has to use the previous functions in the right order.</p>
@@ -770,68 +638,15 @@ b1 = [[ 0.287592  ]
 W2 = [[-2.45566237 -3.27042274  2.00784958  3.36773273]]
 b2 = [[ 0.20459656]]
 </code></pre><p><strong>Expected Output</strong>:</p>
-<table style="width:90%">
-
-<tr> 
-    <td> 
-        **cost after iteration 0**
-    </td>
-    <td> 
-        0.692739
-    </td>
-</tr>
-
-<tr> 
-    <td> 
-        <center> $\vdots$ </center>
-    </td>
-    <td> 
-        <center> $\vdots$ </center>
-    </td>
-</tr>
-
-  <tr>
-    <td>**W1**</td>
-    <td> [[-0.65848169  1.21866811]
- [-0.76204273  1.39377573]
- [ 0.5792005  -1.10397703]
- [ 0.76773391 -1.41477129]]</td> 
-  </tr>
-
-  <tr>
-    <td>**b1**</td>
-    <td> [[ 0.287592  ]
- [ 0.3511264 ]
- [-0.2431246 ]
- [-0.35772805]] </td> 
-  </tr>
-
-  <tr>
-    <td>**W2**</td>
-    <td> [[-2.45566237 -3.27042274  2.00784958  3.36773273]] </td> 
-  </tr>
-
-
-  <tr>
-    <td>**b2**</td>
-    <td> [[ 0.20459656]] </td> 
-  </tr>
-
-</table>  
+<table style="width:90%"><br><br><tr><br>    <td><br>        <strong>cost after iteration 0</strong><br>    </td><br>    <td><br>        0.692739<br>    </td><br></tr><br><br><tr><br>    <td><br>        <center> $\vdots$ </center><br>    </td><br>    <td><br>        <center> $\vdots$ </center><br>    </td><br></tr><br><br>  <tr><br>    <td><strong>W1</strong></td><br>    <td> [[-0.65848169  1.21866811]<br> [-0.76204273  1.39377573]<br> [ 0.5792005  -1.10397703]<br> [ 0.76773391 -1.41477129]]</td><br>  </tr><br><br>  <tr><br>    <td><strong>b1</strong></td><br>    <td> [[ 0.287592  ]<br> [ 0.3511264 ]<br> [-0.2431246 ]<br> [-0.35772805]] </td><br>  </tr><br><br>  <tr><br>    <td><strong>W2</strong></td><br>    <td> [[-2.45566237 -3.27042274  2.00784958  3.36773273]] </td><br>  </tr><br><br><br>  <tr><br>    <td><strong>b2</strong></td><br>    <td> [[ 0.20459656]] </td><br>  </tr><br><br></table>  
 
 <h3 id="4-5-Predictions"><a href="#4-5-Predictions" class="headerlink" title="4.5 Predictions"></a>4.5 Predictions</h3><p><strong>Question</strong>: Use your model to predict by building predict().<br>Use forward propagation to predict results.</p>
-<p><strong>Reminder</strong>: predictions = $y_{prediction} = \mathbb 1 \textfalse = \begin{cases}<br>      1 &amp; \text{if}\ activation &gt; 0.5 \<br>      0 &amp; \text{otherwise}<br>    \end{cases}$  </p>
+<p><strong>Reminder</strong>: predictions = $y_{prediction} = \mathbb 1 \textfalse = \begin{cases}<br>      1 &amp; \text{if} activation &gt; 0.5 \\<br>      0 &amp; \text{otherwise}<br>    \end{cases}$  </p>
 <p>As an example, if you would like to set the entries of a matrix X to 0 and 1 based on a threshold you would do: <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line"># GRADED FUNCTION: predict</span><br><span class="line"></span><br><span class="line">def predict(parameters, X):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    Using the learned parameters, predicts a class for each example in X</span><br><span class="line">    </span><br><span class="line">    Arguments:</span><br><span class="line">    parameters -- python dictionary containing your parameters </span><br><span class="line">    X -- input data of size (n_x, m)</span><br><span class="line">    </span><br><span class="line">    Returns</span><br><span class="line">    predictions -- vector of predictions of our model (red: 0 / blue: 1)</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    </span><br><span class="line">    # Computes probabilities using forward propagation, and classifies to 0/1 using 0.5 as the threshold.</span><br><span class="line">    ### START CODE HERE ### (≈ 2 lines of code)</span><br><span class="line">    A2, cache = forward_propagation(X, parameters)</span><br><span class="line">    predictions = list(map(lambda x : 0 if x &lt; 0.5 else 1, A2[0]))</span><br><span class="line">    predictions = np.array([predictions])</span><br><span class="line">    ### END CODE HERE ###</span><br><span class="line">    </span><br><span class="line">    return predictions</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">parameters, X_assess = predict_test_case()</span><br><span class="line"></span><br><span class="line">predictions = predict(parameters, X_assess)</span><br><span class="line">print(<span class="string">"predictions mean = "</span> + str(np.mean(predictions)))</span><br></pre></td></tr></table></figure>
 <pre><code>predictions mean = 0.666666666667
 </code></pre><p><strong>Expected Output</strong>: </p>
-<table style="width:40%">
-  <tr>
-    <td>**predictions mean**</td>
-    <td> 0.666666666667 </td> 
-  </tr>
-
-</table>
+<table style="width:40%"><br>  <tr><br>    <td><strong>predictions mean</strong></td><br>    <td> 0.666666666667 </td><br>  </tr><br><br></table>
 
 <p>It is time to run the model and see how it performs on a planar dataset. Run the following code to test your model with a single hidden layer of $n_h$ hidden units.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Build a model with a n_h-dimensional hidden layer</span></span><br><span class="line">parameters = nn_model(X, Y, n_h = <span class="number">4</span>, num_iterations = <span class="number">10000</span>, print_cost=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot the decision boundary</span></span><br><span class="line">plot_decision_boundary(<span class="keyword">lambda</span> x: predict(parameters, x.T), X, Y)</span><br><span class="line">plt.title(<span class="string">"Decision Boundary for hidden layer size "</span> + str(<span class="number">4</span>))</span><br></pre></td></tr></table></figure>
@@ -853,25 +668,14 @@ Cost after iteration 9000: 0.218612
 &lt;matplotlib.text.Text at 0x7f0bbeb25898&gt;
 </code></pre><p><img src="/2018/05/15/deeplearning-ai-nn-and-dl-week3/output_50_2.png" alt="png"></p>
 <p><strong>Expected Output</strong>:</p>
-<table style="width:40%">
-  <tr>
-    <td>**Cost after iteration 9000**</td>
-    <td> 0.218607 </td> 
-  </tr>
-
-</table>
+<table style="width:40%"><br>  <tr><br>    <td><strong>Cost after iteration 9000</strong></td><br>    <td> 0.218607 </td><br>  </tr><br><br></table>
 
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Print accuracy</span></span><br><span class="line">predictions = predict(parameters, X)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">'Accuracy: %d'</span> % float((np.dot(Y,predictions.T) + np.dot(<span class="number">1</span>-Y,<span class="number">1</span>-predictions.T))/float(Y.size)*<span class="number">100</span>) + <span class="string">'%'</span>)</span><br></pre></td></tr></table></figure>
 <pre><code>Accuracy: 90%
 </code></pre><p><strong>Expected Output</strong>: </p>
-<table style="width:15%">
-  <tr>
-    <td>**Accuracy**</td>
-    <td> 90% </td> 
-  </tr>
-</table>
+<table style="width:15%"><br>  <tr><br>    <td><strong>Accuracy</strong></td><br>    <td> 90% </td><br>  </tr><br></table>
 
 <p>Accuracy is really high compared to Logistic Regression. The model has learnt the leaf patterns of the flower! Neural networks are able to learn even highly non-linear decision boundaries, unlike logistic regression. </p>
 <p>Now, let’s try out several hidden layer sizes.</p>
@@ -1079,7 +883,7 @@ Accuracy for 50 hidden units: 90.25 %
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
