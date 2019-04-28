@@ -426,6 +426,7 @@ Enjoy it!
 如果想要为多用户并行服务，可配置多转发端口，编辑<code>/etc/shadowsocks/config.json</code>:
 ```
 {
+    "server":"0.0.0.0",
     "port_password":{
          "8989":"password0",
          "9001":"password1",
@@ -433,10 +434,20 @@ Enjoy it!
          "9003":"password3",
          "9004":"password4"
     },
-    "method":"your_encryption_method",
+    "method":"aes-256-cfb",
     "timeout":600
 }
+
 ```
+
+配置成功之后重启服务
+```
+/etc/init.d/shadowsocks start
+/etc/init.d/shadowsocks stop
+/etc/init.d/shadowsocks restart
+/etc/init.d/shadowsocks status
+```
+
 ### 客户端
 [下载客户端](https://shadowsocks.org/en/download/clients.html)，然后根据服务器的配置，编辑端口和密码。同时，shadowsocks客户端可以设置PAC规则，节省转发流量，也可以在PAC文件中增加转发网址。设置好后可以访问ipv6和科学上网，可以[北邮人bt](http://bt.byr.cn)测试。
 ![bt](https://zhbbupt.github.io/images/bt.PNG)
