@@ -813,4 +813,188 @@ You have unlimited cash
 Maximize your profit for this year
 ```
 
-> 参考[Leetcode ]
+``` cpp
+#include <iostream>
+#include <vector>
+#include <stack>
+#include <utility>
+
+using namespace std;
+
+int helper(vector<int>& nums) {
+    stack<pair<int, int>> s;
+    for (auto i : nums) {
+        if (s.empty()) s.push({i, i});
+        else if (s.top().second > i) s.push({i, i});
+        else {
+            int x = s.top().first;
+            while (!s.empty() && s.top().second >= x) s.pop();
+            s.push({x, i});
+        }
+    }
+
+    int ret = 0;
+    while (!s.empty()) {
+        ret += s.top().second - s.top().first;
+        s.pop();
+    }
+    return ret;
+}
+
+int main()  {
+    int n;
+    cin >> n;
+    vector<int> nums(n, 0);
+    for (int i = 0; i < n; i++) {
+        cin >> nums[i];
+    }
+    cout << helper(nums) << endl;
+    return 0;
+}
+```
+
+## letter association(reduced hangman)
+```
+Problem Statement
+Given a lexicon of words, determine the most commonly associated letters.
+
+For example given abc, bcd, cde we should end up with:
+a:b,c (each with a value of 1)
+b:c (value of 2)
+c:b,d (each with value of 2)
+d:c (value of 2)
+e:c,d (each with a value of 1)
+```
+
+``` cpp
+// 用词向量表示频率
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+
+using namespace std;
+
+void helper(vector<string>& nums) {
+    int n = nums.size();
+    vector<vector<bool>> m(26, vector<bool>(n, false));
+    for (int i = 0; i < n; i++) {
+        for (auto j : nums[i]) {
+            m[j - 'a'][i] = m[j - 'a'][i] || true;
+        }
+    }
+    for (auto i = 0; i < 26; i++) {
+        vector<int> cur;
+        int max = 0;
+        for (int j = 0; j < 26; j++) {
+            if (j == i) continue;
+            int ans = 0;
+            for (int k = 0; k < n; k++) {
+                ans += (int)(m[i][k] & m[j][k]);
+            }
+            if (ans == max) cur.push_back(j);
+            else if (ans > max) {
+                max = ans;
+                cur = {j};
+            }
+        }
+        if (!max) continue;
+        cout << (char)('a' + i) << ":";
+        for (auto j : cur) {
+            cout << (char)(j + 'a') << " ";
+        }
+        cout << endl;
+    }
+}
+
+int main() {
+    int n;
+    cin >> n;
+    vector<string> nums;
+    for (auto i = 0; i < n; i++) {
+        string s;
+        cin >> s;
+        nums.push_back(s);
+    }
+    helper(nums);
+    return 0;
+}
+```
+
+## random select from hash table
+```
+Problem
+Design a hash table which allows random select, put, delete, get, and contain in most efficient way" (which is all operations in O(1)).
+
+Use Case
+This is used when we need to add unique elements to the hash map, but then allow randomly picking an element to dispatch. 
+```
+
+``` cpp
+// 加一个反向索引
+#include <iostream>
+#include <unordered_map>
+#include <utility>
+#include <cstdlib>
+#include <time.h>
+#include <cstring>
+using namespace std;
+
+class MyTable {
+private:
+    unordered_map<int, string> id2key;
+    unordered_map<string, pair<int, string>> nums;
+    int cnt;
+public:
+    MyTable(): cnt(0) {}
+
+    string rand_select() {
+        if (!cnt) throw "Empty!";
+        srand(time(NULL));
+        int index = rand() % cnt;
+        return nums[id2key[index]].second;
+    }
+
+    void put(string key, string val) {
+        if (nums.find(key) == nums.end()) {
+            id2key[cnt] = key;
+            nums[key] = {cnt, val};
+            cnt ++;
+        }
+        else {
+            nums[key] = {nums[key].first, val};
+        }
+    }
+
+    string get(string key) {
+        if (nums.find(key) == nums.end()) throw "Not exisit";
+        return nums[key].second;
+    }
+    
+    void Delete(string key) {
+        cout << "delete: " << key << endl;
+        if (nums.find(key) == nums.end() || nums.empty()) throw "Not exisit";
+        int index = nums[key].first;
+        nums.erase(key);
+        key = id2key[cnt - 1];
+        nums[key] = {index, nums[key].second};
+        id2key[index] = key;
+        cnt --;
+    }
+    int size() {
+        return cnt;
+    }
+};
+
+int main() {
+    auto inst = new MyTable();
+    for (int i = 0; i < 6; i++) {
+        inst->put(to_string(i), to_string(i + 1));
+    }
+    for (auto i = 0; i < 7; i++) {
+        cout << inst->rand_select() << endl;
+        system("pause");
+        inst->Delete(to_string(i));
+    }
+    return 0;
+}
+````
