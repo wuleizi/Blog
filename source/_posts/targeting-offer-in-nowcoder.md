@@ -107,6 +107,41 @@ public:
     }
 };
 ```
+如果要是不要求保证原始顺序不变，就用双指针
+``` cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+void helper(vector<int>& nums) {
+    int n = nums.size();
+    int left = 0, right = n - 1;
+    while (left < right) {
+        while (left < right && nums[left] % 2) left++;
+        while (left < right && nums[right] % 2 == 0) right --;
+        if (left < right) {
+            swap(nums[left], nums[right]);
+            left ++, right --;
+        }
+    }
+}
+
+int main() {
+    int n;
+    cin >> n;
+    vector<int> nums(n, 0);
+    for (int i = 0; i < n; i++) {
+        cin >> nums[i];
+    }
+    helper(nums);
+    for (auto i : nums) {
+        cout << i << " ";
+    }
+    cout << endl;
+    return 0;
+}
+```
 
 ## 翻转单链表
 > 输入一个链表，反转链表后，输出链表的所有元素。

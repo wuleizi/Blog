@@ -66,7 +66,7 @@
 
 
 
-  <meta name="keywords" content="算法,总结,OJ,">
+  <meta name="keywords" content="总结,算法,OJ,">
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="这部分主要是在牛客网上进行的验证，部分简单的题目没有进行总结，如果有别的思路，欢迎联系我进行交流。">
-<meta name="keywords" content="算法,总结,OJ">
+<meta name="keywords" content="总结,算法,OJ">
 <meta property="og:type" content="article">
 <meta property="og:title" content="剑指offer部分题目思路总结">
 <meta property="og:url" content="https://wuzequn.com/2018/06/13/targeting-offer-in-nowcoder/index.html">
 <meta property="og:site_name" content="磊子的博客">
 <meta property="og:description" content="这部分主要是在牛客网上进行的验证，部分简单的题目没有进行总结，如果有别的思路，欢迎联系我进行交流。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-25T13:13:29.000Z">
+<meta property="og:updated_time" content="2019-05-01T13:48:21.558Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="剑指offer部分题目思路总结">
 <meta name="twitter:description" content="这部分主要是在牛客网上进行的验证，部分简单的题目没有进行总结，如果有别的思路，欢迎联系我进行交流。">
@@ -371,6 +371,7 @@
 <p>输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。</p>
 </blockquote>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 排序算法的另外一种运用，因为要使用稳定的排序，所以可以利用冒泡排序</span></span><br><span class="line">    <span class="comment">// 冒泡排序的两种写法：https://blog.csdn.net/shuaizai88/article/details/73250615</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 第一种：</span></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    // 向下沉</span></span><br><span class="line"><span class="comment">    void reOrderArray(vector&lt;int&gt; &amp;nums) &#123;</span></span><br><span class="line"><span class="comment">        int n = nums.size();</span></span><br><span class="line"><span class="comment">        for (int i = 0; i &lt; n - 1; i++) &#123;</span></span><br><span class="line"><span class="comment">            for (int j = 0;j &lt; n - 1 - i; j++) &#123;</span></span><br><span class="line"><span class="comment">                if (nums[j] % 2 == 0 &amp;&amp; nums[j + 1] % 2)</span></span><br><span class="line"><span class="comment">                    swap(nums[j], nums[j + 1]);</span></span><br><span class="line"><span class="comment">            &#125;</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="comment">// 第二种：向上飘</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">reOrderArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.size();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i ++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = n - <span class="number">1</span>;j &gt; i; j --) &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[j] % <span class="number">2</span> &amp;&amp; nums[j - <span class="number">1</span>] % <span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line">                    swap(nums[j], nums[j - <span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>如果要是不要求保证原始顺序不变，就用双指针<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">helper</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = nums.size();</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>, right = n - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">        <span class="keyword">while</span> (left &lt; right &amp;&amp; nums[left] % <span class="number">2</span>) left++;</span><br><span class="line">        <span class="keyword">while</span> (left &lt; right &amp;&amp; nums[right] % <span class="number">2</span> == <span class="number">0</span>) right --;</span><br><span class="line">        <span class="keyword">if</span> (left &lt; right) &#123;</span><br><span class="line">            swap(nums[left], nums[right]);</span><br><span class="line">            left ++, right --;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums(n, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; nums[i];</span><br><span class="line">    &#125;</span><br><span class="line">    helper(nums);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> i : nums) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="翻转单链表"><a href="#翻转单链表" class="headerlink" title="翻转单链表"></a>翻转单链表</h2><blockquote>
 <p>输入一个链表，反转链表后，输出链表的所有元素。</p>
 </blockquote>
@@ -582,9 +583,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
-          
             <a href="/tags/总结/" rel="tag"># 总结</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
           
             <a href="/tags/OJ/" rel="tag"># OJ</a>
           
@@ -708,7 +709,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -721,7 +722,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
