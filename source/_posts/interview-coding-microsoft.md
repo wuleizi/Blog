@@ -158,6 +158,25 @@ public:
 };
 ```
 
+``` cpp
+// 方法二，便于理解，因为pre_sell必须要在sell之前的那一天
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int n = prices.size();
+        if (n <= 1) return 0;
+        int sell = 0, buy = INT_MIN, pre_sell = 0;
+        for (int i = 0; i < n; i++) {
+            int temp = pre_sell;
+            pre_sell = sell;
+            sell = max(sell, buy + prices[i]);
+            buy = max(buy, temp - prices[i]);
+        }
+        return sell;
+    }
+};
+```
+
 ### Best Time to Buy and Sell Stock with Transaction Fee
 > 验证地址[Leetcode 714](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)
 
@@ -165,16 +184,15 @@ public:
 class Solution {
 public:
     int maxProfit(vector<int>& prices, int fee) {
-        if (prices.empty()) return 0;
         int n = prices.size();
-        vector<int> sell(n, 0);
-        vector<int> buy(n, 0);
-        buy[0] = -prices[0];
-        for (int i = 1; i < n; i++) {
-            sell[i] = max(sell[i - 1], buy[i - 1] + prices[i] - fee);
-            buy[i] = max(buy[i - 1], sell[i - 1] - prices[i]);
+        if (n <= 1) return 0;
+        int sell = 0, buy = INT_MIN;
+        for (auto i : prices) {
+            int pre_sell = sell;
+            sell = max(sell, buy + i);
+            buy = max(pre_sell - i - fee, buy);
         }
-        return sell[n - 1];
+        return sell;
     }
 };
 ```
@@ -221,60 +239,67 @@ public:
 #include <iostream>
 #include <vector>
 #include <math.h>
-
 using namespace std;
 
-int helper(vector<vector<char>>& nums) {
+int helper(vector<string>& nums) {
     if (nums.empty() || nums[0].empty()) return 0;
-    int m = nums.size(), n = nums[0].size();
     
+    int m = nums.size(), n = nums[0].size();
     vector<vector<int>> dp(m, vector<int>(n, 0));
+
     for (int i = 0; i < m; i++) {
         int ans = 0;
-        for (int j = 0; j < n; j++) {
-            if (nums[i][j] == 'E') ans ++;
-            if (nums[i][j] == 'W') ans = 0;
-            dp[i][j] = ans;
-        }
-        ans = 0;
-        for (int j = n - 1; j >= 0; j --) {
-            if (dp[i][j]) ans = max(ans, dp[i][j]);
-            else ans = 0;
-            dp[i][j] = ans;
+        for (int j = 0; j <= n; j++) {
+            if (j == n || nums[i][j] == 'W') {
+                for (int k = j - 1; k >= 0 && nums[i][k] != 'W'; k--) {
+                    dp[i][k] = ans;
+                }
+                ans = 0;
+            }
+            else if (nums[i][j] == 'E') {
+                ans ++;
+            }
         }
     }
-    
-    int ret = 0;
-    for (int j = 0; j < n; j++) {
+
+    for (int i = 0; i < n; i++) {
         int ans = 0;
-        int cnt = 0;
-        for (int i = 0; i < m; i++) {
-            if (nums[i][j] == 'E') ans ++;
-            if (nums[i][j] == 'W') ans = 0;
-            if (dp[i][j]) cnt = dp[i][j];
-            else cnt = 0;
-            ret = max(ret, cnt + ans);
+        for (int j = 0; j <= m; j++) {
+            if (j == m || nums[j][i] == 'W') {
+                for (int k = j - 1; k >= 0 && nums[k][i] != 'W'; k--) {
+                    dp[k][i] += ans;
+                }
+                ans = 0;
+            }
+            else if (nums[j][i] == 'E') {
+                ans ++;
+            }
+        }
+    }
+    int ret = 0;
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            if (nums[i][j] == 'E') ret = max(ret, dp[i][j] - 1);
+            else ret = max(ret, dp[i][j]);
         }
     }
     return ret;
 }
 
-
 int main() {
-    int m, n;
-    cin >> m >> n;
-    vector<vector<char>> nums(m, vector<char>(n, 0));
-    for (int i = 0; i < m; i++) {
-        for (int j = 0; j < n; j++) {
-            cin >> nums[i][j];
-        }
+    int n;
+    cin >> n;
+    vector<string> nums;
+    for (int i = 0; i < n; i++) {
+        string s;
+        cin >> s;
+        nums.push_back(s);
     }
-       
     cout << helper(nums) << endl;
     return 0;
 }
 /*
-5 5
+5 
 0E00E
 EW0E0
 EE0E0
@@ -679,23 +704,18 @@ public:
 
 ``` cpp
 
+// 利用先序遍历，且先遍历右节点
 class Solution {
 public:
+    void helper(TreeNode* root, int level, vector<int>& ret) {
+        if (!root) return;
+        if (ret.size() < level) ret.push_back(root->val);
+        helper(root->right, level + 1, ret);
+        helper(root->left, level + 1, ret);
+    }
     vector<int> rightSideView(TreeNode* root) {
         vector<int> ret;
-        if (!root) return ret;
-        vector<TreeNode*> cur;
-        cur.push_back(root);
-        while (true) {
-            vector<TreeNode*> next;
-            ret.push_back(cur.back()->val);
-            for (auto i : cur) {
-                if (i->left) next.push_back(i->left);
-                if (i->right) next.push_back(i->right);
-            }
-            if (next.empty()) break;
-            cur = next;
-        }
+        helper(root, 1, ret);
         return ret;
     }
 };
@@ -717,7 +737,7 @@ int helper(string a, string b) {
     for (int i = 1; i <= m; i++) {
         for (int j = 1; j <= n; j++) {
             dp[i][j] = min(dp[i - 1][j] + 1, dp[i][j - 1] + 1);
-            dp[i][j] = min(dp[i][j], dp[i - 1][j - 1] + (a[i - 1] == b[j - 1]));
+            dp[i][j] = min(dp[i][j], dp[i - 1][j - 1] + (a[i - 1] != b[j - 1]));
         }
     }
     return dp[m][n];
@@ -736,52 +756,55 @@ int main() {
 ``` cpp
 #include <iostream>
 #include <vector>
-#include <utility>
+#include <algorithm>
 #include <unordered_set>
+#include <unordered_map>
+#include <cstring>
 using namespace std;
 
-void convert(int n, vector<pair<string, int>> nums, vector<pair<string, int>>& ret) {
-    for (auto i : nums) {
-        ret.push_back({"(" + to_string(n) + "+" + i.first + ")", n + i.second});
-        ret.push_back({"(" + to_string(n) + "-" + i.first + ")", n - i.second});
-        ret.push_back({"(" + to_string(n) + "*" + i.first + ")", n * i.second});
-        if (i.second) ret.push_back({"(" + to_string(n) + "/" + i.first + ")", n / i.second});
-        
-        // ret.push_back({"(" + i.first + "+" + to_string(n) + ")", i.second + n});
-        ret.push_back({"(" + i.first + "-" + to_string(n) + ")", i.second - n});
-        // ret.push_back({"(" + i.first + "*" + to_string(n) + ")", i.second * n});
-        if (n) ret.push_back({"(" + i.first + "/" + to_string(n) + ")", i.second / n});
-    }
-}
-
-vector<pair<string, int>> dfs(vector<int> nums) {
-    if (nums.size() == 1) {
-        return {{to_string(nums[0]), nums[0]}};
-    }
+unordered_map<int, vector<string>> dfs(vector<int> nums, int index) {
     int n = nums.size();
-    
-    vector<pair<string, int>> ret;
-    for (int i = 0; i < n; i++) {
-        auto temp = nums;
-        temp.erase(temp.begin() + i);
-        convert(nums[i], dfs(temp), ret);
+    unordered_map<int, vector<string>> ret;
+    if (index == n - 1) {
+        ret[nums[index]].push_back(to_string(nums[index]));
+        return ret;
+    }
+    for (int i = index; i < n; i++) {
+        if (i != index && nums[index] == nums[i]) continue;
+        swap(nums[i], nums[index]);
+        int a = nums[index];
+        for (auto j : dfs(nums, index + 1)) {
+            int b = j.first;
+            for (auto k : j.second) {
+                ret[a + b].push_back("(" + to_string(a) + "+" + k + ")");
+                ret[a - b].push_back("(" + to_string(a) + "-" + k + ")");
+                ret[a * b].push_back("(" + to_string(a) + "*" + k + ")");
+                if (b) ret[a / b].push_back("(" + to_string(a) + "/" + k + ")");
+            }
+        }
     }
     return ret;
 }
 
 unordered_set<string> helper(vector<int>& nums) {
-    auto ans = dfs(nums);
+    sort(nums.begin(), nums.end());
     unordered_set<string> ret;
-    for (auto i : ans) {
-        if (i.second == 24) ret.insert(i.first);
+    for (auto i : dfs(nums, 0)) {
+        if (i.first == 24) {
+            for (auto j : i.second) {
+                ret.insert(j);
+            }
+        }
     }
-    cout << ret.size() << endl;
     return ret;
 }
 
+
 int main() {
-    vector<int> nums(4, 0);
-    for (int i = 0; i < 4; i++) {
+    int n;
+    cin >> n;
+    vector<int> nums(n, 0);
+    for (int i = 0; i < n; i++) {
         cin >> nums[i];
     }
     for (auto i : helper(nums)) {
