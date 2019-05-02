@@ -1230,6 +1230,7 @@ public:
 
 ## 差值的绝对值第K大
 题目：一个数组，任意两个数存在差值，求差值绝对值第K大是多少
+> [Leetcode 719](https://leetcode.com/problems/find-k-th-smallest-pair-distance/)
 ``` cpp
 #include <iostream>
 #include <vector>
@@ -1272,6 +1273,67 @@ int main() {
     cout << helper(nums, k) << endl;
     return 0;
 }
+```
+## 字典序第K大(*)
+> [Leetcode 440](https://leetcode.com/problems/k-th-smallest-in-lexicographical-order/)
+
+``` cpp
+class Solution {
+public:
+    int findKthNumber(int n, int k)
+    {
+        int result = 1;
+        for(--k; k > 0; )
+        {
+            // calculate #|{result, result*, result**, result***, ...}|
+            int count = 0;
+            for (long long first = static_cast<long long>(result), last = first + 1;
+                first <= n; // the interval is not empty
+                first *= 10, last *= 10) // increase a digit
+            {
+                // valid interval = [first, last) union [first, n]
+                count += static_cast<int>((min(n + 1LL, last) - first)); // add the length of interval
+            }
+            
+            if (k >= count)
+            {   // skip {result, result*, result**, result***, ...}
+                // increase the current prefix
+                ++result;
+                k -= count;
+            }
+            else
+            {   // not able to skip all of {result, result*, result**, result***, ...}
+                // search more detailedly
+                result *= 10;
+                --k;
+            }
+        }
+        return result;
+    }
+};
+```
+
+## Kth Smallest Number in Multiplication Table(*)
+> [Leetcode 668](https://leetcode.com/problems/kth-smallest-number-in-multiplication-table/)
+
+``` cpp
+class Solution {
+public:
+    int findKthNumber(int m, int n, int k) {
+        int lo = 1, hi = m*n;//[lo, hi)
+        while(lo < hi) {
+            int mid = lo + (hi - lo) / 2;
+            int count = 0,  j = m;
+            for(int i = 1; i <= n; i++) {
+                while(j >=1 && i*j > mid) j--;
+                count += (j);
+            }
+            if(count < k) lo = mid + 1;
+            else hi = mid;
+        }
+        return lo;
+    }
+};
 ```
 
 ## 将0移到最前面
