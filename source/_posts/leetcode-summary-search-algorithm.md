@@ -1450,21 +1450,24 @@ public:
 // next permutation 版本
 class Solution {
 public:
+    void next_permutation(string& s) {
+        int n = s.size();
+        int i = n - 2;
+        while (i >= 0 && s[i] >= s[i + 1]) i--;
+        if (i >= 0) {
+            int j = n - 1;
+            while (s[j] <= s[i]) j --;
+            swap(s[j], s[i]);
+        }
+        reverse(s.begin() + i + 1, s.end());
+    }
     string getPermutation(int n, int k) {
-        vector<long long> fac(n, 1);
-        vector<int> nums(n, 0);
-        for (int i = 1; i < n; i++) {
-            fac[i] = fac[i - 1] * i;
-        }
-        for (int i = 0; i < n; i++) {
-            nums[i] = i + 1;
-        }
         string ret;
-        for (int i = 0; i < n; i++) {
-            int index = (k - 1) / fac[n - i - 1];
-            ret += to_string(nums[index]);
-            nums.erase(nums.begin() + index);
-            k -= index * fac[n - i - 1];
+        for (int i = 1; i <= n; i++) {
+            ret = ret + to_string(i);;
+        }
+        for (int i = 0; i < k - 1; i++) {
+            next_permutation(ret);
         }
         return ret;
     }
