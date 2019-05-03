@@ -31,7 +31,12 @@ class Solution {
 public:
     int rectCover(int number) {
         if (number <= 2) return number;
-        else return rectCover(number - 1) + rectCover(number - 2);
+        int pre = 1, cur = 2;
+        for (int i = 3; i <= number; i++) {
+            cur += pre;
+            pre = cur - pre;
+        }
+        return cur;
     }
 };
 ```
@@ -1231,36 +1236,34 @@ struct TreeNode {
 };
 */
 class Solution {
+// 用栈而不是队列做bfs
 public:
     vector<vector<int> > Print(TreeNode* pRoot) {
-        // 如果只用栈会导致顺序错误，所以用了一个队列一个栈
         vector<vector<int>> ret;
-        queue<TreeNode*> q;
-        int dir = 1;
         if (!pRoot) return ret;
-        q.push(pRoot);
-        while (!q.empty()) {
-            stack<TreeNode*> s;
+        stack<TreeNode*> cur;
+        int dir = 1;
+        cur.push(pRoot);
+        while (true) {
             vector<int> ans;
-            while (!q.empty()) {
-                ans.push_back(q.front()->val);
-                s.push(q.front());
-                q.pop();
-            }
-            while (!s.empty()) {
-                auto cur = s.top();
+            stack<TreeNode*> next;
+            while (!cur.empty()) {
+                ans.push_back(cur.top()->val);
+                auto temp = cur.top();
+                cur.pop();
                 if (dir) {
-                    if (cur->right) q.push(cur->right);
-                    if (cur->left) q.push(cur->left);
+                    if (temp->left) next.push(temp->left);
+                    if (temp->right) next.push(temp->right);
                 }
                 else {
-                    if (cur->left) q.push(cur->left);
-                    if (cur->right) q.push(cur->right);
+                    if (temp->right) next.push(temp->right);
+                    if (temp->left) next.push(temp->left);
                 }
-                s.pop();
             }
             ret.push_back(ans);
+            if (next.empty()) break;
             dir ^= 1;
+            cur = next;
         }
         return ret;
     }
@@ -1386,23 +1389,22 @@ public:
 ``` cpp
 class Solution {
 public:
-
-    vector<int> maxInWindows(const vector<int> &num, unsigned int size) {
-        deque<int> buf; // 单调队列
+    vector<int> maxInWindows(const vector<int>& num, unsigned int size)
+    {
+        int len = (long long)size;
+        int n = num.size();
+        if (!len) return vector<int>();
+        deque<int> d;
         vector<int> ret;
-        if (size == 0) return ret; // 牛客网比leetcode增加了size==0的情况
-        int len = num.size();
-        for (int i = 0; i < len; i++) {
-            while (!buf.empty() && num[i] >= num[buf.back()])
-                buf.pop_back(); // 将小于当前值的都删掉，所以buf中存的始终比窗口数少
-            buf.push_back(i);
-            // 牛客网用的是unsigned int 表示的size，需要把size转成int，
-            // 否则i - size + 1负数会溢出变成整数
-            if (i >= (int)size - 1) ret.push_back(num[buf.front()]);
-            if (buf.front() <= i - (int)size + 1) buf.pop_front();
+        for (int i = 0; i < n; i++) {
+            while (!d.empty() && num[d.back()] <= num[i]) d.pop_back();
+            d.push_back(i);
+            while (!d.empty() && d.front() <= i - len) d.pop_front();
+            if (i >= len - 1) ret.push_back(num[d.front()]);
         }
         return ret;
-     }
+        
+    }
 };
 ```
 
