@@ -80,10 +80,12 @@ class Solution {
 public:
     void wiggleSort(vector<int>& nums) {
         // 之所以这样是防止中间的部分重叠例如[4, 5, 5, 6]
+        vector<int> ans(nums);
+        sort(ans.begin(), ans.end());
         int n = nums.size();
         int l = (n + 1) / 2 - 1, r = n - 1;
         for (int i = 0; i < n; i++) {
-            if (i & 1) nums[i] = ans[r --];
+            if (i & 1) nums[i] = ans[r--];
             else nums[i] = ans[l--];
         }
     }
@@ -225,6 +227,8 @@ public:
 
 
 ## Minimum Height Trees
+> [Leetcode 310](https://leetcode.com/problems/minimum-height-trees/)
+
 For a undirected graph with tree characteristics, we can choose any node as the root. The result graph is then a rooted tree. Among all possible rooted trees, those with minimum height are called minimum height trees (MHTs). Given such a graph, write a function to find all the MHTs and return a list of their root labels.
 
 Format
