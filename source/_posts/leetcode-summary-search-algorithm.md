@@ -1422,22 +1422,50 @@ Output: "2314"
 class Solution {
 public:
     string getPermutation(int n, int k) {
-        vector<int> nums(n, 0);
+        if (n < 1) return "";
         vector<int> fac(n, 1);
-        string ret;
+        vector<int> nums(n, 0);
+        
         for (int i = 0; i < n; i++) {
             nums[i] = i + 1;
         }
+        
         for (int i = 1; i < n; i++) {
             fac[i] = fac[i - 1] * i;
         }
-        for (int i = 0; i < n - 1; i++) {
-            int index = (k - 1) / fac[n - 1 - i];
+        
+        string ret;
+        for (int i = 0; i < n; i++) {
+            int index = (k - 1) / fac[n - i - 1];
             ret += to_string(nums[index]);
             nums.erase(nums.begin() + index);
             k -= index * fac[n - 1 - i];
         }
-        ret += to_string(nums[0]);
+        return ret;
+    }
+};
+```
+
+``` cpp
+// next permutation 版本
+class Solution {
+public:
+    string getPermutation(int n, int k) {
+        vector<long long> fac(n, 1);
+        vector<int> nums(n, 0);
+        for (int i = 1; i < n; i++) {
+            fac[i] = fac[i - 1] * i;
+        }
+        for (int i = 0; i < n; i++) {
+            nums[i] = i + 1;
+        }
+        string ret;
+        for (int i = 0; i < n; i++) {
+            int index = (k - 1) / fac[n - i - 1];
+            ret += to_string(nums[index]);
+            nums.erase(nums.begin() + index);
+            k -= index * fac[n - i - 1];
+        }
         return ret;
     }
 };
