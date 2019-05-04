@@ -2027,7 +2027,7 @@ Note:
 
 
 ``` cpp
-// 二分的实际应用，用来寻找最优值
+// 二分答案，类似于求绝对值差值第K大那道题
 class Solution {
 public:
     int minEatingSpeed(vector<int>& piles, int H) {
