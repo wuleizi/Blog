@@ -522,39 +522,46 @@ int main() {
 > 参考全排列的算法，也可以参考[next permutation](https://www.cnblogs.com/grandyang/p/4428207.html)
 
 ``` cpp
+// 此题的做题思路是全排列
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <cstring>
+
 using namespace std;
-void next_permutation(string& s) {
-    int n = s.size();
-    int i = n - 2;
-    while (i >= 0 && s[i] >= s[i + 1]) i--;
-    if (i >= 0) {
-        int j = n - 1;
-        while (s[j] <= s[i]) j --;
-        swap(s[j], s[i]);
+
+void next_permutation(vector<int>& nums) {
+    int n = nums.size();
+    int index = n - 2;
+    // 全排列中的全是升序，那么恢复的时候一定index之后是降序
+    while (index >= 0 && nums[index] >= nums[index + 1]) index --;
+    if (index >= 0) {
+        // 找到升序中的第一个小于该值的第一个值，也就是swap的位置
+        int i = n - 1;
+        while (i > index && nums[i] <= nums[index]) i --;
+        swap(nums[i], nums[index]);
     }
-    reverse(s.begin() + i + 1, s.end());
-    // 如果reverse放在外面，则会无限循环，当整体已经处于降序的情况下，reverse会变成升序，此时就会变成全排列的第一个
+    // 如果已经逆序了，就变成了顺序
+    reverse(nums.begin() + index + 1, nums.end());
 }
 
-string helper(int n, int k) {
-    string ret;
-    for (int i = 1; i <= n; i++) {
-        ret = ret + to_string(i);;
+void helper(vector<int>& nums, int k) {
+    int n = nums.size();
+    
+    for (int i = 0; i < k; i++) {
+        for (auto j : nums) cout << j << " ";
+        cout << endl;
+        next_permutation(nums);
     }
-    for (int i = 0; i < k - 1; i++) {
-        next_permutation(ret);
-    }
-    return ret;
 }
 
 int main() {
     int n, k;
     cin >> n >> k;
-    cout << helper(n, k) << endl;
+    vector<int> nums(n);
+    for (int i = 0; i < n; i++) {
+        nums[i] = i + 1;
+    }
+    helper(nums, k);
     return 0;
 }
 ```
@@ -692,35 +699,39 @@ int main() {
 // 因为每一个网址都是唯一的自增id，所以肯定能保证在O(1)时间里面生成唯一短网址
 // 解码过程就是将提取下来的数
 class Solution {
-private:
-    unordered_map<string, string> m;
-    long long cnt;
-    unordered_map<char, int> dict;
+class Solution {
 public:
-    Solution(): cnt(0) {
+    unordered_map<char, int> m;
+    unordered_map<long long, string> ans;
+    long long id;
+    Solution() {
+        id = 0;
         int index = 0;
-        for (char i = '0'; i <= '9'; i++) dict[i] = index++;
-        for (char i = 'a'; i <= 'z'; i++) dict[i] = index++;
-        for (char i = 'A'; i <= 'Z'; i++) dict[i] = index++;
+        for (char i = 'a'; i <= 'z'; i++) m[i] = index ++;
+        for (char i = 'A'; i <= 'Z'; i++) m[i] = index ++;
+        for (char i = '0'; i <= '9'; i++) m[i] = index ++;
     }
     
     // Encodes a URL to a shortened URL.
     string encode(string longUrl) {
-        cnt ++;
-        long long ans = cnt;
         string ret;
-        while (ans) {
-            ret.push_back(dict[ans % 62]);
-            ans /= 62;
+        ans[id] = longUrl;
+        long long cnt = id;
+        while (cnt) {
+            ret.push_back(m[cnt % 62]);
+            cnt /= 62;
         }
-        m[ret] = longUrl;
+        id ++;
         return ret;
     }
 
     // Decodes a shortened URL to its original URL.
     string decode(string shortUrl) {
-        if (m.find(shortUrl) == m.end()) return "";
-        else return m[shortUrl];
+        long long ret = 0;
+        for (auto i : shortUrl) {
+            ret = ret * 62 + m[i];
+        }
+        return ans[ret];
     }
 };
 
@@ -1229,8 +1240,61 @@ public:
 ```
 
 ## 差值的绝对值第K大
-题目：一个数组，任意两个数存在差值，求差值绝对值第K大是多少
+题目：一个数组，任意两个数存在差值，求差值绝对值第K小是多少
 > [Leetcode 719](https://leetcode.com/problems/find-k-th-smallest-pair-distance/)
+``` cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int count(vector<int>& nums, int target) {
+    int n = nums.size();
+    int left = 0, right = 1;
+    int ret = 0;
+    while (right < n) {
+        while (left < right && nums[right] - nums[left] > target) left++;
+        if (left < right) {
+            ret += right - left;
+        }
+        right ++;
+    }
+    return ret;
+}
+
+int helper(vector<int>& nums, int k) {
+    int n = nums.size();
+    if (k > n * (n - 1) / 2) return -1;
+    sort(nums.begin(), nums.end());
+    int left = 0, right = nums.back() - nums[0];
+    while (left < right) {
+        int mid = left + (right - left) / 2;
+        // 这种根据left是否需要+1判断使用upper_bound还是lower_bound
+        // 这里需要在前面的个数小于自己的的时候left = mid + 1，所以前面求的小于的个数是包含mid的个数
+        int cnt = count(nums, mid);
+        if (cnt < k) left = mid + 1;
+        else right = mid;
+    }
+    return left;
+}
+
+int main() {
+    int n, k;
+    cin >> n >> k;
+    vector<int> nums(n, 0);
+    for (int i = 0; i < n; i++) {
+        cin >> nums[i];
+    }
+    for (int i = 1; i <= k; i++) {
+        cout << helper(nums, i) << endl;
+    }
+    return 0;
+}
+```
+
+求第K大：
+
 ``` cpp
 #include <iostream>
 #include <vector>
@@ -1257,6 +1321,7 @@ int helper(vector<int>& nums, int k) {
         int mid = left + (right - left) / 2;
         int cnt = search(nums, mid);
         cout << mid << " " << cnt << endl;
+        // 因为需要将left + 1，所以求得是比mid大于等于的个数
         if (cnt >= k) left = mid + 1;
         else right = mid;
     }
@@ -1274,6 +1339,7 @@ int main() {
     return 0;
 }
 ```
+
 ## 字典序第K大(*)
 > [Leetcode 440](https://leetcode.com/problems/k-th-smallest-in-lexicographical-order/)
 
