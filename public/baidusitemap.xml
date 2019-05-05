@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://wuzequn.com/2018/08/27/leetcode-summary-data-structure/</loc>
+    <lastmod>2019-05-05</lastmod>
+  </url>  <url>
     <loc>https://wuzequn.com/2019/04/21/interview-coding-HULU/</loc>
     <lastmod>2019-05-04</lastmod>
   </url>  <url>
@@ -41,9 +44,6 @@
     <lastmod>2019-03-25</lastmod>
   </url>  <url>
     <loc>https://wuzequn.com/2018/08/11/leetcode-summary-bit-manipulation/</loc>
-    <lastmod>2019-03-25</lastmod>
-  </url>  <url>
-    <loc>https://wuzequn.com/2018/08/27/leetcode-summary-data-structure/</loc>
     <lastmod>2019-03-25</lastmod>
   </url>  <url>
     <loc>https://wuzequn.com/2018/09/05/leetcode-summary-dp-and-greedy/</loc>

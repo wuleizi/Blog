@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://wuzequn.com/2018/08/27/leetcode-summary-data-structure/</loc>
+    
+    <lastmod>2019-05-05T14:57:24.220Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://wuzequn.com/2019/04/21/interview-coding-HULU/</loc>
     
     <lastmod>2019-05-04T14:27:42.315Z</lastmod>
@@ -103,13 +110,6 @@
     <loc>https://wuzequn.com/2018/08/11/leetcode-summary-bit-manipulation/</loc>
     
     <lastmod>2019-03-25T13:14:15.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wuzequn.com/2018/08/27/leetcode-summary-data-structure/</loc>
-    
-    <lastmod>2019-03-25T13:14:12.000Z</lastmod>
     
   </url>
   

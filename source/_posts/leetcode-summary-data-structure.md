@@ -1577,47 +1577,37 @@ cache.get(4);       // returns 4
 > list是stl的双端链表，链表指针可以用O(1)时间删除，但是随机访问时间慢
 
 ``` cpp
+typedef list<int>::iterator Iter;
 class LRUCache {
 public:
-    LRUCache(int capacity) : _capacity(capacity) {}
-    // 双端链表里存的是id，map里存的是key，val，iter
+    int cap;
+    unordered_map<int, pair<Iter, int>> m;
+    list<int> d;
     
+    LRUCache(int capacity) {
+        cap = capacity;
+    }
+    
+    void helper(int key) {
+        d.erase(m[key].first);
+        m.erase(key);
+    }
     
     int get(int key) {
-        auto it = cache.find(key);
-        if (it == cache.end()) return -1;
-        touch(it);
-        return it->second.first;
+        if (m.find(key) == m.end()) return -1;
+        int val = m[key].second;
+        helper(key);
+        d.push_front(key);
+        m[key] = {d.begin(), val};
+        return val;
     }
     
     void put(int key, int value) {
-        auto it = cache.find(key);
-        if (it != cache.end()) touch(it);
-        else {
-            if (cache.size() == _capacity) {
-                cache.erase(used.back());
-                used.pop_back();
-            }
-            used.push_front(key);
-        }
-        cache[key] = { value, used.begin() };
+        if (m.find(key) != m.end()) helper(key);
+        else if (m.size() == cap) helper(d.back());
+        d.push_front(key);
+        m[key] = {d.begin(), value};
     }
-    
-private:
-    typedef list<int> LI;
-    typedef pair<int, LI::iterator> PII;
-    typedef unordered_map<int, PII> HIPII;
-    
-    void touch(HIPII::iterator it) {
-        int key = it->first;
-        used.erase(it->second.second);
-        used.push_front(key);
-        it->second.second = used.begin();
-    }
-    
-    HIPII cache;
-    LI used;
-    int _capacity;
 };
 ```
 
@@ -1701,36 +1691,33 @@ Output: -1->0->3->4->5
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+// 归并排序
 class Solution {
 public:
-    ListNode* merge(ListNode* p1, ListNode* p2) {
-        if (!p1) return p2;
-        if (!p2) return p1;
-        ListNode* ret = new ListNode(INT_MIN);
-        ListNode* cur = ret;
-        while (p1 && p2) {
-            if (p1->val < p2->val) {
-                cur->next = p1;
-                cur = p1;
-                p1 = p1->next;
+    ListNode* merge(ListNode* l, ListNode* r) {
+        auto ret = new ListNode(-1);
+        auto cur = ret;
+        while (l && r) {
+            if (l->val < r->val) {
+                cur->next = l;
+                cur = cur->next;
+                l = l->next;
             }
             else {
-                cur->next = p2;
-                cur = p2;
-                p2 = p2->next;
+                cur->next = r;
+                cur = cur->next;
+                r = r->next;
             }
         }
-        if (p1) {
-            cur->next = p1;
-        }
-        if (p2) {
-            cur->next = p2;
-        }
+        while (l) cur->next = l, cur = cur->next, l = l->next;
+        while (r) cur->next = r, cur = cur->next, r = r->next;
+        cur->next = NULL;
         return ret->next;
     }
+    
     ListNode* sortList(ListNode* head) {
         if (!head || !head->next) return head;
-        ListNode* fast = head, *slow = head;
+        auto fast = head, slow = head;
         while (fast->next && fast->next->next) {
             slow = slow->next;
             fast = fast->next->next;
@@ -1740,6 +1727,45 @@ public:
         auto l = sortList(head);
         auto r = sortList(mid);
         return merge(l, r);
+    }
+};
+```
+
+``` cpp
+// 快排版本
+class Solution {
+public:
+    ListNode* partition(ListNode* start, ListNode* end) {
+        ListNode* base = start;
+        start = start->next;
+        ListNode* l = new ListNode(-1);
+        ListNode* curl = l;
+        ListNode* r = new ListNode(-1);
+        ListNode* curr = r;
+        while (start != end) {
+            if (base->val > start->val) 
+                curl->next = start, curl = curl->next;
+            else 
+                curr->next = start, curr = curr->next;
+            start = start->next;
+        }
+        curr->next = end;
+        curl->next = base;
+        base->next = r->next;
+        return l->next;
+    }
+    ListNode* helper(ListNode* start, ListNode* end) {
+        if (start == end) return start;
+        auto mid = start;
+        start = partition(start, end);
+        auto l = helper(start, mid);
+        auto r = helper(mid->next, end);
+        mid->next = r;
+        return l;
+    }
+    ListNode* sortList(ListNode* head) {
+        if (!head) return head;
+        return helper(head, NULL);
     }
 };
 ```
