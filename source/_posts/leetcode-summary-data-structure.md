@@ -2240,76 +2240,71 @@ public:
 
 ## 最近公共祖先
 ``` cpp
-#include <unordered_set>
 #include <iostream>
+#include <vector>
+#include <climits>
 
 using namespace std;
 
-
 struct TreeNode {
     int val;
-    TreeNode* left, *right;
+    TreeNode* left;
+    TreeNode* right;
     TreeNode(int x): val(x), left(NULL), right(NULL) {}
 };
 
+
+
 TreeNode* build() {
-    int c;
-    cin >> c;
-    if (c == -1) return NULL;
-    TreeNode* root = new TreeNode(c);
-    root->left = build();
-    root->right = build();
-    return root;
+    int x;
+    cin >> x;
+    if (x == -1) return NULL;
+    TreeNode* ret = new TreeNode(x);
+    ret->left = build();
+    ret->right = build();
+    return ret;
 }
 
-int helper(TreeNode* root, int& index, unordered_set<int>& m) {
+
+int helper(TreeNode* root, int& x, int& y) {
     if (!root) return -1;
-    int x = root->val;
-    int l, r;
-    if (m.find(x) != m.end()) {
-        m.erase(x);
-        l = helper(root->left, index, m);
-        if (l != -1) {
-            index = x;
-            return l + 1;
-        }
-        r = helper(root->right, index, m);
-        if (r != -1) {
-            index = x;
-            return 1 + r;
-        }
-        return 0;
+    if (root->val == x) {
+        x = INT_MIN;
+        helper(root->left, x, y);
+        helper(root->right, x, y);
+        if (y == INT_MIN) return root->val;
+    }
+    else if (root->val == y) {
+        y = INT_MIN;
+        helper(root->left, x, y);
+        helper(root->right, x, y);
+        if (x == INT_MIN) return root->val;
     }
     else {
-        l = 1 + helper(root->left, index, m);
-        if (index != -1) return l - 1;
-        r = 1 + helper(root->right, index, m);
-        if (index != -1) return r - 1;
-        if (!l && !r)  return -1;
-        if (l && r) {
-            index = root->val;
-            return l + r - 1;
+        int ans = 0;
+        int l = helper(root->left, x, y);
+        ans = (x == INT_MIN) + (y == INT_MIN);
+        if ((x == INT_MIN) && (y == INT_MIN)) return l;
+        
+        int r = helper(root->right, x, y);
+        if ((x == INT_MIN) && (y == INT_MIN)) {
+            if (ans) return root->val;
+            else return r;
         }
-        return l + r;
     }
+    return -1;
 }
 
 int main() {
     TreeNode* root = build();
-    int index = -1;
-    unordered_set<int> m;
-    for (int i = 0; i < 2; i++) {
-        int c;
-        cin >> c;
-        m.insert(c);
+    cout << "Tree Finish" << endl;
+    while (true) {
+        int x, y;
+        cin >> x >> y;
+        cout << helper(root, x, y) << endl;
     }
-    cout << helper(root, index, m) << endl;
-    cout << index << endl;
     return 0;
 }
-
-
-
 ```
 
 ## 指定节点距离叶子节点最近的距离
@@ -2958,28 +2953,31 @@ public:
         int left = index * 2 + 1;
         int right = left + 1;
         int smallest = index;
-        if (left < max && nums[smallest] > nums[left]) smallest = left;
-        if (right < max && nums[smallest] > nums[right]) smallest = right;
+        if (left < max && nums[left] < nums[smallest]) smallest = left;
+        if (right < max && nums[right] < nums[smallest]) smallest = right;
         if (index != smallest) {
             swap(nums[index], nums[smallest]);
             heapfy(nums, smallest, max);
         }
     }
-    int findKthLargest(vector<int>& nums, int k) {
-        int len = nums.size();
-        if (len < k) return -1;
+    
+    int helper(vector<int>& nums, int k) {
+        int n = nums.size();
+        if (n < k) return -1;
         vector<int> ans;
-        for (int i = 0; i < k; i++) {
-            ans.push_back(nums[i]);
-        }
+        for (int i = 0; i < k; i++) ans.push_back(nums[i]);
         for (int i = k / 2; i >= 0; i--) heapfy(ans, i, k);
-        for (int i = k; i < len; i++) {
-            if (ans[0] < nums[i]) {
+        for (int i = k; i < n; i++) {
+            if (nums[i] > ans[0]) {
                 ans[0] = nums[i];
-                for (int j = k / 2; j >= 0; j--) heapfy(ans, j, k);
+                heapfy(ans, 0, k);
             }
         }
         return ans[0];
+    }
+    
+    int findKthLargest(vector<int>& nums, int k) {
+        return helper(nums, k);
     }
 };
 ```
