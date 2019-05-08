@@ -1086,3 +1086,51 @@ int main() {
     return 0;
 }
 ```
+
+
+## 用O(1)空间删除一棵树
+``` cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(int x): val(x), left(NULL), right(NULL) {};
+};
+
+TreeNode* build() {
+    int x;
+    cin >> x;
+    if (x == -1) return NULL;
+    TreeNode* ret = new TreeNode(x);
+    ret->left = build();
+    ret->right = build();
+    return ret;
+}
+
+void helper(TreeNode* root) {
+    if (!root) return;
+    auto cur = root;
+    while (cur->left) cur = cur->left;
+    while (root) {
+        if (root->right) {
+            cur->left = root->right;
+            while (cur->left) cur = cur->left;
+        }
+        auto temp = root->left;
+        delete root;
+        root = temp;
+    }
+}
+
+int main() {
+    TreeNode* root = build();
+    helper(root);
+    return 0;
+}
+```
+
