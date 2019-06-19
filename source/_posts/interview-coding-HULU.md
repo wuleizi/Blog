@@ -145,21 +145,20 @@ void connect(Node *p)
 > 验证地址[geeksforgeeks](https://practice.geeksforgeeks.org/problems/maximum-difference-between-node-and-its-ancestor/1)
 
 ``` cpp
-int helper(Node* root, int& ret) {
-    if (!root) return INT_MAX;
-    int ans = INT_MAX;
-    if (root->left) ans = min(ans, helper(root->left, ret));
-    if (root->right) ans = min(ans, helper(root->right, ret));
-    if (ans == INT_MAX) return root->data;
-    ret = max(ret, root->data - ans);
-    return min(root->data, ans);
+void helper(TreeNode* root, int local_min, int local_max, int& ret) {
+    if (!root) return;
+    if (local_min != INT_MAX) ret = max(ret, root->val - local_min);
+    if (local_max != INT_MAX) ret = max(ret, local_max - root->val);
+    local_min = min(local_min, root->val);
+    local_max = max(local_max, root->val);
+    helper(root, local_min, local_max, ret);
 }
-int maxDiff(Node* root)
-{
+
+int maxDiff(TreeNode* root) {
     // Your code here 
     if (!root) return INT_MIN;
     int ret = INT_MIN;
-    helper(root, ret);
+    helper(root, INT_MAX, INT_MIN, ret);
     return ret;
 }
 ```
