@@ -16,6 +16,8 @@ Hey， 我是**武泽群**，也可以叫我磊子，北京邮电大学本硕毕
 * 领英: [Zequn Wu](https://www.linkedin.com/in/zequn-wu-038a5b133/)
 
 ### 经历
+* 2019 - 至今  微软 算法工程师
+* 2018 - 2019 北京电信 软件开发工程师
 * 2017 - 2017 HULU 算法工程师实习生
 * 2015 - 2018 北京邮电大学 网络技术研究院交换中心硕士
 * 2015 - 2016 [Inceptionpad](http://www.inceptionpad.com/index.php/team) 软件开发工程师
