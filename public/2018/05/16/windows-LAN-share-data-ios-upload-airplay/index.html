@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="相关背景由于最近拍的照片比较多，有一些需要传到电脑里进行备份。还有，有将电脑里的文件用手机投屏到电视上或投影仪上的需求。因此，有网络硬盘做存储中心，手机做控制中心的需求。 我只是个人进行文件备份，对延迟没有突出需求，所以决定将电脑作为局域网中的NAS。 Windows做文件共享此步骤参考了百度经验  右击桌面网络——属性——更改高级共享设置 （注释：查看当前网络 比如：家庭网络、公共网络 等!)">
+<meta name="description" content="相关背景由于最近拍的照片比较多，有一些需要传到电脑里进行备份。还有，有将电脑里的文件用手机投屏到电视上或投影仪上的需求。因此，有网络硬盘做存储中心，手机做控制中心的需求。 我只是个人进行文件备份，对延迟没有突出需求，所以决定将电脑作为局域网中的NAS。 Windows做文件共享此步骤参考了百度经验  右击桌面网络—-属性—-更改高级共享设置 （注释：查看当前网络 比如：家庭网络、公共网络 等!)">
 <meta name="keywords" content="运维,生活">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Windows局域网与手机共享文件以及iOS文件操作">
 <meta property="og:url" content="https://wuzequn.com/2018/05/16/windows-LAN-share-data-ios-upload-airplay/index.html">
 <meta property="og:site_name" content="磊子的博客">
-<meta property="og:description" content="相关背景由于最近拍的照片比较多，有一些需要传到电脑里进行备份。还有，有将电脑里的文件用手机投屏到电视上或投影仪上的需求。因此，有网络硬盘做存储中心，手机做控制中心的需求。 我只是个人进行文件备份，对延迟没有突出需求，所以决定将电脑作为局域网中的NAS。 Windows做文件共享此步骤参考了百度经验  右击桌面网络——属性——更改高级共享设置 （注释：查看当前网络 比如：家庭网络、公共网络 等!)">
+<meta property="og:description" content="相关背景由于最近拍的照片比较多，有一些需要传到电脑里进行备份。还有，有将电脑里的文件用手机投屏到电视上或投影仪上的需求。因此，有网络硬盘做存储中心，手机做控制中心的需求。 我只是个人进行文件备份，对延迟没有突出需求，所以决定将电脑作为局域网中的NAS。 Windows做文件共享此步骤参考了百度经验  右击桌面网络—-属性—-更改高级共享设置 （注释：查看当前网络 比如：家庭网络、公共网络 等!)">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://wuzequn.com/2018/05/16/windows-LAN-share-data-ios-upload-airplay/win1.png">
 <meta property="og:image" content="https://wuzequn.com/2018/05/16/windows-LAN-share-data-ios-upload-airplay/win2.png">
@@ -106,7 +106,7 @@
 <meta property="og:updated_time" content="2019-08-12T14:12:47.872Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Windows局域网与手机共享文件以及iOS文件操作">
-<meta name="twitter:description" content="相关背景由于最近拍的照片比较多，有一些需要传到电脑里进行备份。还有，有将电脑里的文件用手机投屏到电视上或投影仪上的需求。因此，有网络硬盘做存储中心，手机做控制中心的需求。 我只是个人进行文件备份，对延迟没有突出需求，所以决定将电脑作为局域网中的NAS。 Windows做文件共享此步骤参考了百度经验  右击桌面网络——属性——更改高级共享设置 （注释：查看当前网络 比如：家庭网络、公共网络 等!)">
+<meta name="twitter:description" content="相关背景由于最近拍的照片比较多，有一些需要传到电脑里进行备份。还有，有将电脑里的文件用手机投屏到电视上或投影仪上的需求。因此，有网络硬盘做存储中心，手机做控制中心的需求。 我只是个人进行文件备份，对延迟没有突出需求，所以决定将电脑作为局域网中的NAS。 Windows做文件共享此步骤参考了百度经验  右击桌面网络—-属性—-更改高级共享设置 （注释：查看当前网络 比如：家庭网络、公共网络 等!)">
 <meta name="twitter:image" content="https://wuzequn.com/2018/05/16/windows-LAN-share-data-ios-upload-airplay/win1.png">
 
 
@@ -399,13 +399,13 @@
 <p>我只是个人进行文件备份，对延迟没有突出需求，所以决定将电脑作为局域网中的NAS。</p>
 <h3 id="Windows做文件共享"><a href="#Windows做文件共享" class="headerlink" title="Windows做文件共享"></a>Windows做文件共享</h3><p>此步骤参考了<a href="https://jingyan.baidu.com/album/fec7a1e53efe621190b4e7ae.html" target="_blank" rel="noopener">百度经验</a></p>
 <ul>
-<li>右击桌面网络——属性——更改高级共享设置 （注释：查看当前网络 比如：家庭网络、公共网络 等!) “我这里为公共网络”<br><img src="/2018/05/16/windows-LAN-share-data-ios-upload-airplay/win1.png" alt=""></li>
-<li>选择 公共网络—-选择以下选项：启动网络发现———启动文件和打印机共享——-启用共享以便可以访问网络的用户可以读取和写入公用文件夹中的文件(可以不选）——关闭密码保护共享( 注释：其他选项默认即可!)<br><img src="/2018/05/16/windows-LAN-share-data-ios-upload-airplay/win2.png" alt=""></li>
+<li>右击桌面网络—-属性—-更改高级共享设置 （注释：查看当前网络 比如：家庭网络、公共网络 等!) “我这里为公共网络”<br><img src="/2018/05/16/windows-LAN-share-data-ios-upload-airplay/win1.png" alt=""></li>
+<li>选择 公共网络—选择以下选项：启动网络发现——启动文件和打印机共享—–启用共享以便可以访问网络的用户可以读取和写入公用文件夹中的文件(可以不选）—-关闭密码保护共享( 注释：其他选项默认即可!)<br><img src="/2018/05/16/windows-LAN-share-data-ios-upload-airplay/win2.png" alt=""></li>
 <li>保存！<br><img src="/2018/05/16/windows-LAN-share-data-ios-upload-airplay/win3.png" alt=""></li>
-<li>选择需要共享的文件夹 (比如：DY) 右击—属性<br><img src="/2018/05/16/windows-LAN-share-data-ios-upload-airplay/win4.png" alt=""></li>
-<li>共享—— 选择 共享（S）…—-弹出对话框—-添加“Guest”（注释：选择“Guest”是为了降低权限，以方便于所有用户都能访问！）—-共享<br><img src="/2018/05/16/windows-LAN-share-data-ios-upload-airplay/win5.png" alt=""></li>
-<li>选择 高级共享… ——选择 共享此文件 ——确定！<br><img src="/2018/05/16/windows-LAN-share-data-ios-upload-airplay/win6.png" alt=""></li>
-<li>其他用户，通过开始—-运行—-\IP （快捷键 WIN+R）\IP 访问你共享的文件!<br><img src="/2018/05/16/windows-LAN-share-data-ios-upload-airplay/win7.png" alt=""></li>
+<li>选择需要共享的文件夹 (比如：DY) 右击–属性<br><img src="/2018/05/16/windows-LAN-share-data-ios-upload-airplay/win4.png" alt=""></li>
+<li>共享—- 选择 共享（S）…—弹出对话框—添加“Guest”（注释：选择“Guest”是为了降低权限，以方便于所有用户都能访问！）—共享<br><img src="/2018/05/16/windows-LAN-share-data-ios-upload-airplay/win5.png" alt=""></li>
+<li>选择 高级共享… —-选择 共享此文件 —-确定！<br><img src="/2018/05/16/windows-LAN-share-data-ios-upload-airplay/win6.png" alt=""></li>
+<li>其他用户，通过开始—运行—\\IP （快捷键 WIN+R）\\IP 访问你共享的文件!<br><img src="/2018/05/16/windows-LAN-share-data-ios-upload-airplay/win7.png" alt=""></li>
 <li>共享成功!<br><img src="/2018/05/16/windows-LAN-share-data-ios-upload-airplay/win8.png" alt=""><h3 id="ios共享数据"><a href="#ios共享数据" class="headerlink" title="ios共享数据"></a>ios共享数据</h3>下载<a href="https://itunes.apple.com/cn/app/fileexplorer/id499470113?mt=8" target="_blank" rel="noopener">FileExplorer</a><br>本教程参考自<a href="https://zhuanlan.zhihu.com/p/26745885" target="_blank" rel="noopener">iOS神器FileExplorer精简使用教程</a><br>具体操作方法为：</li>
 <li>保持 Windows 和 iPad 在同一局域网环境下，如：使用同一个WiFi。<br><img src="/2018/05/16/windows-LAN-share-data-ios-upload-airplay/ios1.jpg" alt=""></li>
 <li>点击右上角“+号”，选择Windows<br><img src="/2018/05/16/windows-LAN-share-data-ios-upload-airplay/ios2.jpg" alt=""></li>
