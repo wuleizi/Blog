@@ -2,170 +2,149 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://wuzequn.com/About/index.html</loc>
-    
-    <lastmod>2019-07-15T16:01:42.609Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wuzequn.com/2019/04/21/interview-coding-HULU/</loc>
-    
-    <lastmod>2019-05-09T09:16:40.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wuzequn.com/2019/04/13/interview-coding-microsoft/</loc>
-    
-    <lastmod>2019-05-08T14:17:49.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wuzequn.com/2018/08/27/leetcode-summary-data-structure/</loc>
-    
-    <lastmod>2019-05-06T13:38:01.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wuzequn.com/2018/09/03/leetcode-summary-search-algorithm/</loc>
-    
-    <lastmod>2019-05-04T04:07:09.530Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wuzequn.com/2018/06/13/targeting-offer-in-nowcoder/</loc>
-    
-    <lastmod>2019-05-03T10:01:59.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wuzequn.com/2018/04/27/blog-build-and-ipv6-tools/</loc>
-    
-    <lastmod>2019-04-28T06:20:47.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wuzequn.com/2019/03/14/interview-coding-bytedance/</loc>
-    
-    <lastmod>2019-04-28T05:50:10.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wuzequn.com/2018/05/16/windows-LAN-share-data-ios-upload-airplay/</loc>
-    
-    <lastmod>2019-04-16T15:52:16.944Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wuzequn.com/2019/04/10/practice-in-segment-tree/</loc>
-    
-    <lastmod>2019-04-16T15:42:45.848Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wuzequn.com/2019/03/18/interview-coding-airbnb/</loc>
-    
-    <lastmod>2019-04-11T07:44:30.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wuzequn.com/2018/06/09/codeM-2018-qualify/</loc>
-    
-    <lastmod>2019-03-25T13:14:41.661Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wuzequn.com/2018/05/15/deeplearning-ai-nn-and-dl-week3/</loc>
-    
-    <lastmod>2019-03-25T13:14:33.286Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wuzequn.com/2018/05/21/deeplearning-ai-nn-and-dl-week4/</loc>
-    
-    <lastmod>2019-03-25T13:14:29.181Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wuzequn.com/2018/06/21/grGraph-Theory-Algorithm/</loc>
-    
-    <lastmod>2019-03-25T13:14:25.732Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wuzequn.com/2018/08/11/leetcode-summary-bit-manipulation/</loc>
-    
-    <lastmod>2019-03-25T13:14:15.653Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wuzequn.com/2018/09/05/leetcode-summary-dp-and-greedy/</loc>
-    
-    <lastmod>2019-03-25T13:14:09.456Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wuzequn.com/2018/09/08/leetcode-summary-some-sample/</loc>
-    
-    <lastmod>2019-03-25T13:14:02.518Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wuzequn.com/2018/10/25/Leetcode-virtual-contest-2/</loc>
-    
-    <lastmod>2019-03-25T13:13:53.113Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wuzequn.com/2018/09/16/Leetcode-virtual-contest-20180910/</loc>
-    
-    <lastmod>2019-03-25T13:13:41.414Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wuzequn.com/2018/10/16/online-learning-algorithm-background-knowledge-ftrl-provement/</loc>
-    
-    <lastmod>2018-10-16T14:49:50.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wuzequn.com/404.html</loc>
-    
-    <lastmod>2018-04-25T10:17:13.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://wuzequn.com/categories/index.html</loc>
     
-    <lastmod>2018-04-25T09:58:56.000Z</lastmod>
+    <lastmod>2019-08-12T02:35:31.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://wuzequn.com/tags/index.html</loc>
     
-    <lastmod>2018-04-25T09:55:00.000Z</lastmod>
+    <lastmod>2019-08-12T02:35:31.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wuzequn.com/2018/05/16/windows-LAN-share-data-ios-upload-airplay/</loc>
+    
+    <lastmod>2019-08-12T02:35:30.938Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wuzequn.com/2019/04/10/practice-in-segment-tree/</loc>
+    
+    <lastmod>2019-08-12T02:35:30.938Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wuzequn.com/2018/06/13/targeting-offer-in-nowcoder/</loc>
+    
+    <lastmod>2019-08-12T02:35:30.938Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wuzequn.com/2018/09/08/leetcode-summary-some-sample/</loc>
+    
+    <lastmod>2019-08-12T02:35:30.766Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wuzequn.com/2018/10/16/online-learning-algorithm-background-knowledge-ftrl-provement/</loc>
+    
+    <lastmod>2019-08-12T02:35:30.766Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wuzequn.com/2019/03/14/interview-coding-bytedance/</loc>
+    
+    <lastmod>2019-08-12T02:35:30.750Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wuzequn.com/2018/06/21/grGraph-Theory-Algorithm/</loc>
+    
+    <lastmod>2019-08-12T02:35:30.750Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wuzequn.com/2018/09/05/leetcode-summary-dp-and-greedy/</loc>
+    
+    <lastmod>2019-08-12T02:35:30.750Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wuzequn.com/2018/08/11/leetcode-summary-bit-manipulation/</loc>
+    
+    <lastmod>2019-08-12T02:35:30.750Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wuzequn.com/2018/09/03/leetcode-summary-search-algorithm/</loc>
+    
+    <lastmod>2019-08-12T02:35:30.750Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wuzequn.com/2018/08/27/leetcode-summary-data-structure/</loc>
+    
+    <lastmod>2019-08-12T02:35:30.750Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wuzequn.com/2018/05/21/deeplearning-ai-nn-and-dl-week4/</loc>
+    
+    <lastmod>2019-08-12T02:35:30.703Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wuzequn.com/2018/10/25/Leetcode-virtual-contest-2/</loc>
+    
+    <lastmod>2019-08-12T02:35:30.672Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wuzequn.com/2018/04/27/blog-build-and-ipv6-tools/</loc>
+    
+    <lastmod>2019-08-12T02:35:30.672Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wuzequn.com/2018/06/09/codeM-2018-qualify/</loc>
+    
+    <lastmod>2019-08-12T02:35:30.672Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wuzequn.com/2018/05/15/deeplearning-ai-nn-and-dl-week3/</loc>
+    
+    <lastmod>2019-08-12T02:35:30.672Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wuzequn.com/2018/09/16/Leetcode-virtual-contest-20180910/</loc>
+    
+    <lastmod>2019-08-12T02:35:30.672Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wuzequn.com/404.html</loc>
+    
+    <lastmod>2019-08-12T02:35:30.563Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wuzequn.com/About/index.html</loc>
+    
+    <lastmod>2019-08-12T02:35:30.563Z</lastmod>
     
   </url>
   
