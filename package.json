@@ -27,6 +27,6 @@
     "hexo-renderer-stylus": "^0.3.3",
     "hexo-server": "^0.3.3",
     "install": "^0.12.2",
-    "npm": "^6.9.0"
+    "npm": "^6.13.4"
   }
 }
